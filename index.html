@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="RV ACADEMY - ශ්‍රී ලංකාවේ අංක 1 නොමිලේ Forex සහ Crypto අධ්‍යාපනික වෙබ් අඩවිය. Free Signals, Course සහ Trading Tools.">
+    <meta name="keywords" content="Forex Sinhala, Crypto Sinhala, Free Trading Course, RV Academy, Forex Signals Sri Lanka, Best Forex Broker Sinhala">
+    <meta name="author" content="RV ACADEMY">
+    <meta property="og:title" content="RV ACADEMY - Free Trading Education Sri Lanka">
+    <meta property="og:description" content="Learn Forex & Crypto for free. Join thousands of successful Sri Lankan traders today.">
+    <meta property="og:image" content="https://i.ibb.co/placeholder-logo.png">
+    <meta property="og:url" content="https://rvacademy.com">
+
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <title>RV ACADEMY - Home</title>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K4KKB6VCNN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-K4KKB6VCNN');
+    </script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root { --primary-color: #0a192f; --secondary-color: #D4AF37; --text-light: #ccd6f6; --bg-dark-lighter: #112240; }
+        body { font-family: 'Poppins', sans-serif; overflow-x: hidden; background-color: var(--primary-color); color: var(--text-light); padding-top: 80px; }
+        a { text-decoration: none; }
+        .navbar { background-color: rgba(10, 25, 47, 0.95) !important; backdrop-filter: blur(10px); padding: 15px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
+        .navbar-brand { font-weight: 700; font-size: 1.8rem; color: var(--secondary-color) !important; letter-spacing: 1px; }
+        .nav-link { color: var(--text-light) !important; font-weight: 500; margin-left: 15px; transition: 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--secondary-color) !important; }
+        .dropdown-menu { background: #0a192f; border: 1px solid var(--secondary-color); }
+        .dropdown-menu .dropdown-item { color: var(--text-light); }
+        .dropdown-menu .dropdown-item:hover { background-color: var(--secondary-color); color: var(--primary-color); }
+        .btn-gold { background-color: var(--secondary-color); color: var(--primary-color); font-weight: 700; padding: 10px 25px; border-radius: 30px; transition: 0.3s; border: 2px solid var(--secondary-color); }
+        .btn-gold:hover { background-color: transparent; color: var(--secondary-color); transform: translateY(-3px); box-shadow: 0 10px 20px -10px rgba(212, 175, 55, 0.5); }
+        .hero-section { min-height: 100vh; display: flex; align-items: center; background: linear-gradient(135deg, rgba(10,25,47,0.95) 0%, rgba(10,25,47,0.85) 100%), url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1470&auto=format&fit=crop') no-repeat center center/cover; }
+        .hero-title { font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
+        .hero-title span { color: var(--secondary-color); background: linear-gradient(to right, #D4AF37, #fadd7d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-lead { font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9; }
+        .stats-section { background-color: var(--secondary-color); color: var(--primary-color); padding: 40px 0; }
+        .stat-number { font-size: 2.5rem; font-weight: 800; }
+        .feature-card { background: rgba(17, 34, 64, 0.8); padding: 30px; border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.1); transition: 0.3s; height: 100%; }
+        .feature-card:hover { transform: translateY(-10px); border-color: var(--secondary-color); }
+        .feature-icon { font-size: 3rem; color: var(--secondary-color); margin-bottom: 20px; }
+        .news-tabs .nav-link { color: var(--text-light); font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.2); margin-right: 10px; border-radius: 30px; padding: 10px 25px; }
+        .news-tabs .nav-link.active { background-color: var(--secondary-color); color: var(--primary-color) !important; }
+        .news-scroll-container { height: 600px; overflow-y: auto; padding-right: 10px; }
+        .news-scroll-container::-webkit-scrollbar { width: 6px; } .news-scroll-container::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); } .news-scroll-container::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 10px; }
+        .news-card { background: var(--bg-dark-lighter); border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 15px; margin-bottom: 15px; transition: 0.2s; border-left: 3px solid var(--secondary-color); }
+        .news-card:hover { background: rgba(17, 34, 64, 0.8); transform: translateX(5px); }
+        .news-title { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 8px; display: block; } .news-title:hover { color: var(--secondary-color); } .news-meta { font-size: 0.8rem; opacity: 0.6; } .news-source-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; background: rgba(212, 175, 55, 0.2); color: var(--secondary-color); margin-right: 10px; }
+        .cta-section { background: linear-gradient(to right, #112240, #0a192f); padding: 80px 0; text-align: center; border-top: 3px solid var(--secondary-color); }
+        .testimonials-scroll-box { max-height: 700px; overflow-y: auto; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
+        .testimonials-scroll-box::-webkit-scrollbar { width: 8px; } .testimonials-scroll-box::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); } .testimonials-scroll-box::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 10px; }
+        .review-form-card { background: var(--bg-dark-lighter); border: 1px solid var(--secondary-color); border-radius: 15px; padding: 30px; }
+        .form-control, .form-select { background-color: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: var(--text-light); }
+        .form-control:focus, .form-select:focus { background-color: rgba(0,0,0,0.5); border-color: var(--secondary-color); color: var(--text-light); box-shadow: none; }
+        /* Dual Language & Mobile */
+        .lang-en { display: none; } body.english-mode .lang-si { display: none !important; } body.english-mode .lang-en { display: inline-block !important; }
+        .lang-switch { cursor: pointer; opacity: 0.5; transition: 0.3s; } .lang-switch.active { opacity: 1; font-weight: bold; color: var(--secondary-color) !important; }
+        @media (max-width: 768px) { .hero-section { padding-top: 120px; text-align: center; padding-bottom: 60px; } .hero-title { font-size: 2.5rem; } .hero-section .d-flex { flex-direction: column; width: 100%; } .hero-section .btn { width: 100%; margin-bottom: 10px; } }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-chart-line me-2"></i> RV ACADEMY</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="index.html"><span class="lang-si">මුල් පිටුව</span><span class="lang-en">Home</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="course.html"><span class="lang-si">පාඨමාලාව</span><span class="lang-en">Course</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="ea.html"><span class="lang-si">Free EA</span><span class="lang-en">Free EA</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="vip.html"><span class="lang-si">VIP</span><span class="lang-en">VIP</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="tools.html"><span class="lang-si">Tools</span><span class="lang-en">Tools</span></a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><span class="lang-si">තවත්</span><span class="lang-en">More</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="analysis.html"><i class="fas fa-chart-pie me-2"></i> <span class="lang-si">විශ්ලේෂණ</span><span class="lang-en">Analysis</span></a></li>
+                            <li><a class="dropdown-item" href="blog.html"><i class="fas fa-newspaper me-2"></i> <span class="lang-si">බ්ලොග්</span><span class="lang-en">Blog</span></a></li>
+                            <li><hr class="dropdown-divider" style="background: rgba(255,255,255,0.1);"></li>
+                            <li><a class="dropdown-item" href="about.html"><i class="fas fa-info-circle me-2"></i> <span class="lang-si">අපි ගැන</span><span class="lang-en">About Us</span></a></li>
+                            <li><a class="dropdown-item" href="faq.html"><i class="fas fa-question-circle me-2"></i> <span class="lang-si">ගැටළු (FAQ)</span><span class="lang-en">FAQ</span></a></li>
+                            <li><a class="dropdown-item" href="contact.html"><i class="fas fa-envelope me-2"></i> <span class="lang-si">සම්බන්ධ වීමට</span><span class="lang-en">Contact Us</span></a></li>
+                            <li><a class="dropdown-item" href="legal.html"><i class="fas fa-shield-alt me-2"></i> <span class="lang-si">නීතිමය</span><span class="lang-en">Legal</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-lg-3"><a href="vip.html" class="btn btn-gold btn-sm"><span class="lang-si">JOIN VIP</span><span class="lang-en">JOIN VIP</span></a></li>
+                    <li class="nav-item ms-3 border-start ps-3 d-none d-lg-block" style="border-color: rgba(255,255,255,0.1) !important;"></li>
+                    <li class="nav-item d-flex align-items-center"><span class="nav-link lang-switch active" id="btn-si" onclick="setLanguage('si')">SIN</span><span class="nav-link opacity-50 px-0">|</span><span class="nav-link lang-switch" id="btn-en" onclick="setLanguage('en')">ENG</span></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7" data-aos="fade-right" data-aos-duration="1000">
+                    <h1 class="hero-title"><span class="lang-si">සාර්ථක Trader කෙනෙක් වෙන්න <br><span>ඔබත් කැමතිද?</span></span><span class="lang-en">Do You Want To Become <br><span>A Successful Trader?</span></span></h1>
+                    <p class="hero-lead"><span class="lang-si">RV ACADEMY වෙතින් Forex Trading මුල සිට සරලව, සිංහලෙන් ඉගෙන ගන්න. කිසිදු ගෙවීමකින් තොරව ප්‍රවීණයන්ගේ මඟපෙන්වීම ලබාගන්න.</span><span class="lang-en">Learn Forex Trading from scratch with RV ACADEMY. Get expert guidance completely free of charge.</span></p>
+                    <div class="d-flex gap-3 flex-column flex-md-row"><a href="course.html" class="btn btn-gold btn-lg"><i class="fas fa-play-circle me-2"></i> <span class="lang-si">නොමිලේ පාඨමාලාව අරඹන්න</span><span class="lang-en">Start Free Course</span></a><a href="vip.html" class="btn btn-outline-light btn-lg" style="border-radius: 30px;"><i class="fab fa-telegram-plane me-2"></i> <span class="lang-si">Join VIP Channel</span><span class="lang-en">Join VIP Channel</span></a></div>
+                </div>
+                <div class="col-lg-5 d-none d-lg-block" data-aos="fade-left" data-aos-delay="200"><img src="https://cdni.iconscout.com/illustration/premium/thumb/online-trading-illustration-download-in-svg-png-gif-file-formats--stock-market-forex-business-finance-pack-illustrations-3262209.png" alt="Trading Illustration" class="img-fluid"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-4" data-aos="zoom-in"><div class="stat-number">5,000+</div><div><span class="lang-si">සාර්ථක සිසුන්</span><span class="lang-en">Successful Students</span></div></div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100"><div class="stat-number">100%</div><div><span class="lang-si">නොමිලේ අධ්‍යාපනය</span><span class="lang-en">Free Education</span></div></div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200"><div class="stat-number">$0</div><div><span class="lang-si">VIP සඳහා අයකිරීම්</span><span class="lang-en">VIP Charges</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5" style="background: #0f2442;">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up"><h6 style="color: var(--secondary-color); letter-spacing: 2px;">MARKET UPDATES</h6><h2 class="fw-bold"><span class="lang-si">නවතම මූල්‍ය පුවත්</span><span class="lang-en">Latest Market News</span></h2></div>
+            <ul class="nav nav-pills news-tabs justify-content-center mb-4" id="news-tabs" role="tablist" data-aos="fade-up">
+                <li class="nav-item" role="presentation"><button class="nav-link active" id="forex-tab" data-bs-toggle="pill" data-bs-target="#forex-content" type="button" role="tab"><i class="fas fa-chart-line me-2"></i> FXSTREET (FOREX)</button></li>
+                <li class="nav-item" role="presentation"><button class="nav-link" id="crypto-tab" data-bs-toggle="pill" data-bs-target="#crypto-content" type="button" role="tab"><i class="fab fa-bitcoin me-2"></i> COINTELEGRAPH (CRYPTO)</button></li>
+            </ul>
+            <div class="tab-content" id="news-tab-content" data-aos="fade-up" data-aos-delay="200">
+                <div class="tab-pane fade show active" id="forex-content" role="tabpanel"><div class="news-scroll-container" id="fxstreet-news-list"><div class="text-center text-muted opacity-50 mt-5">Loading FXStreet News...</div></div></div>
+                <div class="tab-pane fade" id="crypto-content" role="tabpanel"><div class="news-scroll-container" id="cointelegraph-news-list"><div class="text-center text-muted opacity-50 mt-5">Loading Cointelegraph News...</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up"><h2 class="fw-bold"><span class="lang-si">RV Academy විශේෂ වෙන්නේ ඇයි?</span><span class="lang-en">Why Choose RV Academy?</span></h2></div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100"><div class="feature-card text-center"><i class="fas fa-graduation-cap feature-icon"></i><h3><span class="lang-si">මුල සිට සරලව</span><span class="lang-en">Beginner Friendly</span></h3><p class="text-light opacity-75"><span class="lang-si">කිසිදු දැනුමක් නොමැති අයෙකුට වුවද පහසුවෙන් තේරුම් ගත හැකි ලෙස සැකසූ පියවරෙන් පියවර පාඩම් මාලාව.</span><span class="lang-en">Step-by-step lessons designed to be easily understood even by those with zero trading knowledge.</span></p></div></div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200"><div class="feature-card text-center" style="border-color: var(--secondary-color)"><i class="fas fa-gem feature-icon"></i><h3><span class="lang-si">Premium VIP සිග්නල්</span><span class="lang-en">Premium VIP Signals</span></h3><p class="text-light opacity-75"><span class="lang-si">අපගේ විශ්වාසදායක Broker සමඟ සම්බන්ධ වී ලොව හොඳම විශ්ලේෂකයින්ගේ Trading Signals නොමිලේ ලබාගන්න.</span><span class="lang-en">Join our trusted broker and get free trading signals from the world's best analysts.</span></p></div></div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300"><div class="feature-card text-center"><i class="fas fa-headset feature-icon"></i><h3><span class="lang-si">24/7 සහාය</span><span class="lang-en">24/7 Support</span></h3><p class="text-light opacity-75"><span class="lang-si">ඔබට වෙළඳාමේදී මතුවන ඕනෑම ගැටළුවක් සඳහා අපගේ කණ්ඩායමෙන් ක්ෂණික පිළිතුරු ලබාගන්න.</span><span class="lang-en">Get instant answers from our team for any issues you encounter while trading.</span></p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5" style="background: linear-gradient(to bottom, var(--primary-color), #0f1525);">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up"><h6 style="color: var(--secondary-color); letter-spacing: 2px;"><span class="lang-si">සිසුන්ගේ ප්‍රතිචාර</span><span class="lang-en">STUDENT REVIEWS</span></h6><h2 class="fw-bold text-white"><span class="lang-si">ලොව පුරා අපව විශ්වාස කරන දහස් ගණනක්</span><span class="lang-en">Trusted by Thousands Worldwide</span></h2></div>
+            <div class="testimonials-scroll-box mb-5" data-aos="fade-up">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4"><div class="p-4 h-100" style="background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.1);"><div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-light opacity-75 fst-italic small"><span class="lang-si">"මම Forex ගැන මුකුත්ම දන්නේ නැතුව හිටියේ. RV Academy නොමිලේ පාඨමාලාව නිසා අද මම දවසට $50ක් හොයනවා. ස්තූතියි!"</span><span class="lang-en">"Knew nothing about Forex. Thanks to RV Academy, I now make $50/day. Thank you!"</span></p><div class="d-flex align-items-center mt-3"><div class="rounded-circle me-3 d-flex justify-content-center align-items-center fw-bold" style="width:35px;height:35px;background:var(--secondary-color);color:#000;">K</div><div><h6 class="text-white mb-0 small">Kasun Perera</h6><small class="text-muted" style="font-size:0.7rem;">Colombo, SL 🇱🇰</small></div></div></div></div>
+                    <div class="col-md-6 col-lg-4"><div class="p-4 h-100" style="background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.1);"><div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-light opacity-75 fst-italic small"><span class="lang-si">"VIP සිග්නල්ස් මාරම Accurate. ගිය මාසේ මගේ Account එක ඩබල් කරගත්තා. සුපිරි වැඩක්."</span><span class="lang-en">"VIP signals are super accurate. Doubled my account last month. Great work!"</span></p><div class="d-flex align-items-center mt-3"><div class="rounded-circle me-3 d-flex justify-content-center align-items-center fw-bold" style="width:35px;height:35px;background:var(--secondary-color);color:#000;">D</div><div><h6 class="text-white mb-0 small">Dilshan Kumara</h6><small class="text-muted" style="font-size:0.7rem;">Kandy, SL 🇱🇰</small></div></div></div></div>
+                    <div class="col-md-6 col-lg-4"><div class="p-4 h-100" style="background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.1);"><div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><p class="text-light opacity-75 fst-italic small"><span class="lang-si">"EA එක (Robot) නම් පට්ට. මම ජොබ් එක කරන ගමන් මේකෙන් ලාභ ගන්නවා. ලොකු උදව්වක්."</span><span class="lang-en">"The EA (Robot) is awesome. Making profit while doing my job. Huge help."</span></p><div class="d-flex align-items-center mt-3"><div class="rounded-circle me-3 d-flex justify-content-center align-items-center fw-bold" style="width:35px;height:35px;background:var(--secondary-color);color:#000;">C</div><div><h6 class="text-white mb-0 small">Chamari Silva</h6><small class="text-muted" style="font-size:0.7rem;">Gampaha, SL 🇱🇰</small></div></div></div></div>
+                    <div class="col-md-6 col-lg-4"><div class="p-4 h-100" style="background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.1);"><div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-light opacity-75 fst-italic small"><span class="lang-si">"මුලින් විශ්වාස කළේ නෑ, ඒත් දැන් දන්නවා මේක තමයි ලංකාවේ හොඳම තැන කියලා. ජය!"</span><span class="lang-en">"Didn't believe at first, but now I know this is the best place in Sri Lanka. Cheers!"</span></p><div class="d-flex align-items-center mt-3"><div class="rounded-circle me-3 d-flex justify-content-center align-items-center fw-bold" style="width:35px;height:35px;background:var(--secondary-color);color:#000;">N</div><div><h6 class="text-white mb-0 small">Nuwan Pradeep</h6><small class="text-muted" style="font-size:0.7rem;">Galle, SL 🇱🇰</small></div></div></div></div>
+                    <div class="col-md-6 col-lg-4"><div class="p-4 h-100" style="background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.1);"><div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-light opacity-75 fst-italic small"><span class="lang-si">"Admin අයියා ගොඩක් හොඳින් කියලා දෙනවා. මගේ හැම ප්‍රශ්නෙකටම උත්තර දුන්නා."</span><span class="lang-en">"Admin brother teaches very well. Answered all my questions patiently."</span></p><div class="d-flex align-items-center mt-3"><div class="rounded-circle me-3 d-flex justify-content-center align-items-center fw-bold" style="width:35px;height:35px;background:var(--secondary-color);color:#000;">K</div><div><h6 class="text-white mb-0 small">Kavindi Jayasinghe</h6><small class="text-muted" style="font-size:0.7rem;">Kurunegala, SL 🇱🇰</small></div></div></div></div>
+                    <div class="col-md-6 col-lg-4"><div class="p-4 h-100" style="background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.1);"><div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div><p class="text-light opacity-75 fst-italic small"><span class="lang-si">"සල්ලි දීලා ගිය කෝස් වලට වඩා මේ නොමිලේ දෙන එක දාස් ගුණයක් වටිනවා."</span><span class="lang-en">"This free course is thousand times better than the paid ones I attended."</span></p><div class="d-flex align-items-center mt-3"><div class="rounded-circle me-3 d-flex justify-content-center align-items-center fw-bold" style="width:35px;height:35px;background:var(--secondary-color);color:#000;">L</div><div><h6 class="text-white mb-0 small">Lahiru Madushan</h6><small class="text-muted" style="font-size:0.7rem;">Matara, SL 🇱🇰</small></div></div></div></div>
+                    <div class="col-md-6 col-lg-4"><div class="p-4 h-100" style="background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.1);"><div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-light opacity-75 fst-italic small"><span class="lang-si">"Best forex signals in Sri Lanka. Keep it up bro!"</span><span class="lang-en">"Best forex signals in Sri Lanka. Keep it up bro!"</span></p><div class="d-flex align-items-center mt-3"><div class="rounded-circle me-3 d-flex justify-content-center align-items-center fw-bold" style="width:35px;height:35px;background:var(--secondary-color);color:#000;">S</div><div><h6 class="text-white mb-0 small">Shehan A.</h6><small class="text-muted" style="font-size:0.7rem;">Negombo, SL 🇱🇰</small></div></div></div></div>
+                    <div class="col-md-6 col-lg-4"><div class="p-4 h-100" style="background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.1);"><div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-light opacity-75 fst-italic small"><span class="lang-si">"Crypto ගැන මුකුත් දන්නේ නෑ. ඒත් මේකෙන් ගොඩක් දේවල් ඉගෙන ගත්තා."</span><span class="lang-en">"Knew nothing about Crypto. Learned a lot from here."</span></p><div class="d-flex align-items-center mt-3"><div class="rounded-circle me-3 d-flex justify-content-center align-items-center fw-bold" style="width:35px;height:35px;background:var(--secondary-color);color:#000;">R</div><div><h6 class="text-white mb-0 small">Ruwanthi P.</h6><small class="text-muted" style="font-size:0.7rem;">Kaduwela, SL 🇱🇰</small></div></div></div></div>
+                    <div class="col-md-6 col-lg-4"><div class="p-4 h-100" style="background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.1);"><div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><p class="text-light opacity-75 fst-italic small"><span class="lang-si">"ඉතාම විශ්වාසදායකයි. දිගටම කරගෙන යන්න."</span><span class="lang-en">"Very trustworthy service. Keep going."</span></p><div class="d-flex align-items-center mt-3"><div class="rounded-circle me-3 d-flex justify-content-center align-items-center fw-bold" style="width:35px;height:35px;background:var(--secondary-color);color:#000;">M</div><div><h6 class="text-white mb-0 small">Mahesh D.</h6><small class="text-muted" style="font-size:0.7rem;">Anuradhapura, SL 🇱🇰</small></div></div></div></div>
+                    <div class="col-md-6 col-lg-4"><div class="p-4 h-100" style="background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.1);"><div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-light opacity-75 fst-italic small"><span class="lang-si">"Great community and support!"</span><span class="lang-en">"Great community and support!"</span></p><div class="d-flex align-items-center mt-3"><div class="rounded-circle me-3 d-flex justify-content-center align-items-center fw-bold" style="width:35px;height:35px;background:var(--secondary-color);color:#000;">A</div><div><h6 class="text-white mb-0 small">Asanka W.</h6><small class="text-muted" style="font-size:0.7rem;">Dubai, UAE 🇦🇪</small></div></div></div></div>
+                    <div class="col-md-6 col-lg-4"><div class="p-4 h-100" style="background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.1);"><div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-light opacity-75 fst-italic small"><span class="lang-si">"Trading ගැන තිබුණ බය නැති වුණා."</span><span class="lang-en">"Lost my fear of trading thanks to this."</span></p><div class="d-flex align-items-center mt-3"><div class="rounded-circle me-3 d-flex justify-content-center align-items-center fw-bold" style="width:35px;height:35px;background:var(--secondary-color);color:#000;">T</div><div><h6 class="text-white mb-0 small">Tharindu K.</h6><small class="text-muted" style="font-size:0.7rem;">Ratnapura, SL 🇱🇰</small></div></div></div></div>
+                    <div class="col-md-6 col-lg-4"><div class="p-4 h-100" style="background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.1);"><div class="text-warning mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-light opacity-75 fst-italic small"><span class="lang-si">"Highly recommended for everyone!"</span><span class="lang-en">"Highly recommended for everyone!"</span></p><div class="d-flex align-items-center mt-3"><div class="rounded-circle me-3 d-flex justify-content-center align-items-center fw-bold" style="width:35px;height:35px;background:var(--secondary-color);color:#000;">J</div><div><h6 class="text-white mb-0 small">Janaka S.</h6><small class="text-muted" style="font-size:0.7rem;">Korea 🇰🇷</small></div></div></div></div>
+                </div>
+            </div>
+            <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-lg-8"><div class="review-form-card"><h4 class="text-center mb-4 text-white"><span class="lang-si"><i class="fas fa-pen me-2"></i>ඔබේ අදහස අපට කියන්න</span><span class="lang-en"><i class="fas fa-pen me-2"></i>Submit Your Review</span></h4><form onsubmit="event.preventDefault(); alert('Review submitted for moderation!');"><div class="row g-3"><div class="col-md-6"><input type="text" class="form-control" placeholder="Name" required></div><div class="col-md-6"><input type="text" class="form-control" placeholder="City"></div><div class="col-12"><select class="form-select"><option selected>⭐⭐⭐⭐⭐</option><option>⭐⭐⭐⭐</option></select></div><div class="col-12"><textarea class="form-control" rows="3" placeholder="Message" required></textarea></div><div class="col-12 text-center"><button type="submit" class="btn btn-gold px-5"><span class="lang-si">SUBMIT</span><span class="lang-en">SUBMIT</span></button></div></div></form></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" data-aos="flip-up">
+        <div class="container">
+            <h2 class="mb-4 fw-bold"><span class="lang-si">ඔබේ Trading ගමන අදම අරඹන්න</span><span class="lang-en">Start Your Trading Journey Today</span></h2>
+            <a href="vip.html" class="btn btn-gold btn-lg px-5 py-3">JOIN RV ACADEMY NOW <i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
+    </section>
+
+    <footer style="background-color: #050910; color: #ccd6f6; padding-top: 3rem;">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 mb-4"><h5 class="text-uppercase mb-4" style="color: var(--secondary-color); font-weight: 700;">RV ACADEMY</h5><p class="small opacity-75">Sri Lanka's #1 Free Forex & Crypto educational website.</p><div class="mt-3"><a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fab fa-youtube"></i></a><a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fab fa-telegram-plane"></i></a><a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fab fa-facebook-f"></i></a></div></div>
+                <div class="col-lg-4 col-md-6 mb-4"><h6 class="text-uppercase mb-4 font-weight-bold" style="color: var(--secondary-color);">Quick Links</h6><ul class="list-unstyled"><li class="mb-2"><a href="course.html" class="text-white text-decoration-none opacity-75">Free Course</a></li><li class="mb-2"><a href="vip.html" class="text-white text-decoration-none opacity-75">VIP Signals</a></li><li class="mb-2"><a href="legal.html" class="text-white text-decoration-none opacity-75">Risk & Terms</a></li></ul></div>
+                <div class="col-lg-4 col-md-6 mb-4"><h6 class="text-uppercase mb-4 font-weight-bold" style="color: var(--secondary-color);">Contact</h6><p class="small opacity-75"><i class="fas fa-envelope me-2"></i> info@rvacademy.com</p><p class="small opacity-75"><i class="fab fa-whatsapp me-2"></i> +94 7X XXX XXXX</p></div>
+            </div>
+        </div>
+        <div class="container-fluid p-3" style="background-color: #020408; border-top: 1px solid rgba(255,255,255,0.05);"><div class="container"><p class="text-muted mb-2" style="font-size: 0.75rem; text-align: justify; opacity: 0.6;"><strong style="color: #dc3545;">RISK WARNING:</strong> Trading involves high risk. Leverage can lead to losses. Only invest what you can afford to lose.</p><div class="text-center mt-3"><small class="opacity-50">© 2025 RV ACADEMY. All Rights Reserved.</small></div></div></div>
+    </footer>
+
+    <button onclick="topFunction()" id="backToTopBtn" title="Go to top" style="display: none; position: fixed; bottom: 25px; right: 25px; z-index: 99; border: none; outline: none; background-color: var(--secondary-color); color: var(--primary-color); cursor: pointer; padding: 12px 15px; border-radius: 50%; font-size: 18px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3);"><i class="fas fa-arrow-up"></i></button>
+
+    <div class="modal fade" id="telegramPopup" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content" style="background: linear-gradient(135deg, #0a192f 0%, #112240 100%); border: 2px solid var(--secondary-color); border-radius: 15px;"><div class="modal-header border-0"><h5 class="modal-title gold-text fw-bold">DON'T MISS OUT!</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-center text-white py-4"><i class="fas fa-bell fa-3x mb-3 gold-text"></i><h4><span class="lang-si">නොමිලේ සිග්නල් ලබාගන්න!</span><span class="lang-en">Get Free Daily Signals!</span></h4><p class="opacity-75 mb-4"><span class="lang-si">අපගේ ටෙලිග්‍රෑම් චැනලය සමග සම්බන්ධ වී දිනපතා නොමිලේ වෙළඳ සිග්නල් ලබාගන්න.</span><span class="lang-en">Join our official Telegram channel to get free daily trading signals.</span></p><a href="#" target="_blank" class="btn btn-gold btn-lg w-100" onclick="closePopupForever()">JOIN TELEGRAM NOW</a></div></div></div></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script> 
+        AOS.init({ duration: 800, once: true }); 
+        async function loadRSS(url, containerId, sourceName) {
+            const container = document.getElementById(containerId);
+            try {
+                const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`);
+                const data = await response.json();
+                if (data.status === 'ok') {
+                    container.innerHTML = '';
+                    data.items.slice(0, 15).forEach(item => {
+                        const date = new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                        container.innerHTML += `<div class="news-card"><a href="${item.link}" target="_blank" class="news-title">${item.title}</a><div class="news-meta"><span class="news-source-badge">${sourceName}</span><i class="far fa-clock me-1"></i> ${date}</div></div>`;
+                    });
+                }
+            } catch (error) { container.innerHTML = '<div class="text-danger opacity-75">News unavailable.</div>'; }
+        }
+        loadRSS('https://www.fxstreet.com/rss/news', 'fxstreet-news-list', 'FXStreet');
+        loadRSS('https://cointelegraph.com/rss', 'cointelegraph-news-list', 'Cointelegraph');
+        function setLanguage(lang) { localStorage.setItem('preferredLang', lang); if (lang === 'en') { document.body.classList.add('english-mode'); document.getElementById('btn-si').classList.remove('active'); document.getElementById('btn-en').classList.add('active'); } else { document.body.classList.remove('english-mode'); document.getElementById('btn-en').classList.remove('active'); document.getElementById('btn-si').classList.add('active'); } }
+        if (localStorage.getItem('preferredLang') === 'en') { setLanguage('en'); }
+        let mybutton = document.getElementById("backToTopBtn"); window.onscroll = function() { if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) { mybutton.style.display = "block"; } else { mybutton.style.display = "none"; } }; function topFunction() { document.body.scrollTop = 0; document.documentElement.scrollTop = 0; }
+        if (!localStorage.getItem('rv_telegram_popup_seen')) { setTimeout(() => { new bootstrap.Modal(document.getElementById('telegramPopup')).show(); }, 10000); }
+        function closePopupForever() { localStorage.setItem('rv_telegram_popup_seen', 'true'); bootstrap.Modal.getInstance(document.getElementById('telegramPopup')).hide(); }
+    </script>
+</body>
+</html>

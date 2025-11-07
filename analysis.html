@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RV ACADEMY - Market Analysis</title>
+    <meta name="description" content="Live Forex & Crypto Market Analysis Tools. Whale Tracker, Economic Calendar, and Currency Heatmaps.">
+    <meta property="og:title" content="Market Analysis - RV ACADEMY">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XXXXXXXXXX');</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary-color: #0a192f; --secondary-color: #D4AF37; --text-light: #ccd6f6; --bg-dark-lighter: #112240; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--primary-color); color: var(--text-light); padding-top: 80px; overflow-x: hidden; }
+        a { text-decoration: none; }
+        .navbar { background-color: rgba(10, 25, 47, 0.95) !important; backdrop-filter: blur(10px); padding: 15px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
+        .navbar-brand { font-weight: 700; font-size: 1.8rem; color: var(--secondary-color) !important; letter-spacing: 1px; }
+        .nav-link { color: var(--text-light) !important; font-weight: 500; margin-left: 15px; transition: 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--secondary-color) !important; }
+        .dropdown-menu { background: #0a192f; border: 1px solid var(--secondary-color); }
+        .dropdown-menu .dropdown-item { color: var(--text-light); }
+        .dropdown-menu .dropdown-item:hover { background-color: var(--secondary-color); color: var(--primary-color); }
+        .btn-gold { background-color: var(--secondary-color); color: var(--primary-color); font-weight: 700; border-radius: 30px; padding: 8px 25px; transition: 0.3s; border: 2px solid var(--secondary-color); }
+        .btn-gold:hover { background-color: transparent; color: var(--secondary-color); }
+        .analysis-header { background: linear-gradient(135deg, #112240 0%, #0a192f 100%); padding: 60px 0; text-align: center; border-bottom: 3px solid var(--secondary-color); }
+        .gold-text { color: var(--secondary-color); }
+        .analysis-tabs .nav-link { color: var(--text-light); border: 1px solid var(--secondary-color); margin: 0 5px; border-radius: 30px; padding: 10px 25px; font-weight: 600; transition: 0.3s; }
+        .analysis-tabs .nav-link.active { background-color: var(--secondary-color); color: var(--primary-color) !important; }
+        .widget-card { background: var(--bg-dark-lighter); border: 1px solid rgba(212, 175, 55, 0.1); border-radius: 15px; padding: 15px; height: 650px; margin-bottom: 30px; overflow: hidden; }
+        .widget-title { color: var(--secondary-color); font-weight: 600; margin-bottom: 20px; border-left: 4px solid var(--secondary-color); padding-left: 10px; }
+        .session-card { background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .session-card.active { border-color: #25D366; background: rgba(37, 211, 102, 0.1); }
+        .session-status { font-size: 0.9rem; margin-top: 5px; }
+        .status-open { color: #25D366; } .status-closed { color: #dc3545; opacity: 0.5; }
+        .tracker-box { background: #000; height: 600px; overflow-y: auto; border-radius: 10px; padding: 10px; font-family: monospace; font-size: 0.85rem; position: relative; border: 1px solid var(--secondary-color); }
+        .tracker-box::-webkit-scrollbar { width: 5px; } .tracker-box::-webkit-scrollbar-track { background: #112240; } .tracker-box::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 10px; }
+        .trade-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); animation: slideIn 0.4s ease-out; margin-bottom: 4px; border-radius: 4px; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+        .trade-buy { color: #25D366; background: rgba(37, 211, 102, 0.05); } 
+        .trade-sell { color: #ff5252; background: rgba(255, 82, 82, 0.05); }
+        .whale-alert { border-left: 3px solid #ff2600 !important; background: rgba(255, 60, 0, 0.15) !important; }
+        .form-select-dark { background-color: var(--bg-dark-lighter); color: #fff; border: 1px solid var(--secondary-color); }
+        .tracker-tabs .nav-link { color: var(--text-light); background: rgba(0,0,0,0.2); border: none; border-radius: 5px 5px 0 0; margin-right: 5px; font-size: 0.9rem; }
+        .tracker-tabs .nav-link.active { background: var(--secondary-color); color: var(--primary-color) !important; font-weight: bold; }
+        .lang-en { display: none; } body.english-mode .lang-si { display: none !important; } body.english-mode .lang-en { display: inline-block !important; }
+        .lang-switch { cursor: pointer; opacity: 0.5; transition: 0.3s; } .lang-switch.active { opacity: 1; font-weight: bold; color: var(--secondary-color) !important; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-chart-line me-2"></i> RV ACADEMY</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><span class="lang-si">මුල් පිටුව</span><span class="lang-en">Home</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="course.html"><span class="lang-si">පාඨමාලාව</span><span class="lang-en">Course</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="ea.html"><span class="lang-si">Free EA</span><span class="lang-en">Free EA</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="vip.html"><span class="lang-si">VIP</span><span class="lang-en">VIP</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="tools.html"><span class="lang-si">Tools</span><span class="lang-en">Tools</span></a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"><span class="lang-si">තවත්</span><span class="lang-en">More</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="analysis.html"><i class="fas fa-chart-pie me-2"></i> <span class="lang-si">විශ්ලේෂණ</span><span class="lang-en">Analysis</span></a></li>
+                            <li><a class="dropdown-item" href="blog.html"><i class="fas fa-newspaper me-2"></i> <span class="lang-si">බ්ලොග්</span><span class="lang-en">Blog</span></a></li>
+                            <li><hr class="dropdown-divider" style="background: rgba(255,255,255,0.1);"></li>
+                            <li><a class="dropdown-item" href="about.html"><i class="fas fa-info-circle me-2"></i> <span class="lang-si">අපි ගැන</span><span class="lang-en">About Us</span></a></li>
+                            <li><a class="dropdown-item" href="faq.html"><i class="fas fa-question-circle me-2"></i> <span class="lang-si">ගැටළු (FAQ)</span><span class="lang-en">FAQ</span></a></li>
+                            <li><a class="dropdown-item" href="contact.html"><i class="fas fa-envelope me-2"></i> <span class="lang-si">සම්බන්ධ වීමට</span><span class="lang-en">Contact Us</span></a></li>
+                            <li><a class="dropdown-item" href="legal.html"><i class="fas fa-shield-alt me-2"></i> <span class="lang-si">නීතිමය</span><span class="lang-en">Legal</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-lg-3"><a href="vip.html" class="btn btn-gold btn-sm"><span class="lang-si">JOIN VIP</span><span class="lang-en">JOIN VIP</span></a></li>
+                    <li class="nav-item ms-3 border-start ps-3 d-none d-lg-block" style="border-color: rgba(255,255,255,0.1) !important;"></li>
+                    <li class="nav-item d-flex align-items-center"><span class="nav-link lang-switch active" id="btn-si" onclick="setLanguage('si')">SIN</span><span class="nav-link opacity-50 px-0">|</span><span class="nav-link lang-switch" id="btn-en" onclick="setLanguage('en')">ENG</span></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="analysis-header" data-aos="fade-down">
+        <div class="container">
+            <h1 class="display-4 fw-bold"><i class="fas fa-chart-pie me-3"></i><span class="gold-text">MARKET ANALYSIS</span></h1>
+            <p class="lead opacity-75"><span class="lang-si">Forex සහ Crypto වෙළඳපොළ විශ්ලේෂණයට අවශ්‍ය නවතම දත්ත.</span><span class="lang-en">Live data for professional Forex & Crypto market analysis.</span></p>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <ul class="nav nav-pills analysis-tabs justify-content-center mb-5" id="analysisTabs" role="tablist" data-aos="fade-up">
+            <li class="nav-item" role="presentation"><button class="nav-link active" id="forex-tab" data-bs-toggle="pill" data-bs-target="#forex-content" type="button" role="tab"><i class="fas fa-globe-americas me-2"></i> FOREX</button></li>
+            <li class="nav-item" role="presentation"><button class="nav-link" id="crypto-tab" data-bs-toggle="pill" data-bs-target="#crypto-content" type="button" role="tab"><i class="fab fa-bitcoin me-2"></i> CRYPTO</button></li>
+        </ul>
+
+        <div class="tab-content" id="analysisTabsContent">
+            <div class="tab-pane fade show active" id="forex-content" role="tabpanel">
+                <div class="mb-5" data-aos="fade-up">
+                    <h3 class="widget-title"><span class="lang-si">Forex වෙළඳ සැසි</span><span class="lang-en">Forex Market Sessions</span></h3>
+                    <div class="row g-3 text-center">
+                        <div class="col-6 col-md-3"><div class="session-card" id="session-sydney"><div class="fw-bold">SYDNEY</div><div class="session-status status-closed" id="status-sydney">CLOSED</div></div></div>
+                        <div class="col-6 col-md-3"><div class="session-card" id="session-tokyo"><div class="fw-bold">TOKYO</div><div class="session-status status-closed" id="status-tokyo">CLOSED</div></div></div>
+                        <div class="col-6 col-md-3"><div class="session-card" id="session-london"><div class="fw-bold">LONDON</div><div class="session-status status-closed" id="status-london">CLOSED</div></div></div>
+                        <div class="col-6 col-md-3"><div class="session-card" id="session-ny"><div class="fw-bold">NEW YORK</div><div class="session-status status-closed" id="status-ny">CLOSED</div></div></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6" data-aos="fade-right"><h3 class="widget-title"><span class="lang-si">ආර්ථික දින දර්ශනය</span><span class="lang-en">Economic Calendar</span></h3><div class="widget-card p-0"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>{ "colorTheme": "dark", "isTransparent": true, "width": "100%", "height": "100%", "locale": "en", "importanceFilter": "0,1,2", "currencyFilter": "USD,EUR,GBP,JPY,AUD,CAD,CHF,NZD" }</script></div></div></div>
+                    <div class="col-lg-6" data-aos="fade-left"><h3 class="widget-title"><span class="lang-si">මුදල් ශක්තිමත්මතාව (Heat Map)</span><span class="lang-en">Currency Heat Map</span></h3><div class="widget-card p-0"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-heat-map.js" async>{ "width": "100%", "height": "100%", "currencies": [ "EUR", "USD", "JPY", "GBP", "CHF", "AUD", "CAD", "NZD" ], "isTransparent": true, "colorTheme": "dark", "locale": "en" }</script></div></div></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6" data-aos="fade-right"><h3 class="widget-title"><span class="lang-si">තාක්ෂණික විශ්ලේෂණ මීටරය</span><span class="lang-en">Technical Analysis Gauge</span></h3><div class="mb-3"><select class="form-select form-select-sm form-select-dark" id="ta-symbol-select" onchange="updateTAGauge()"><option value="FX:EURUSD" selected>EUR/USD</option><option value="FX:GBPUSD">GBP/USD</option><option value="FX:USDJPY">USD/JPY</option><option value="FX:USDCAD">USD/CAD</option><option value="FX:AUDUSD">AUD/USD</option><option value="FX:USDCHF">USD/CHF</option><option value="FX:XAUUSD">GOLD</option></select></div><div class="widget-card p-0" style="height: 500px;" id="ta-gauge-container"></div></div>
+                    <div class="col-lg-6" data-aos="fade-left"><h3 class="widget-title"><span class="lang-si">සජීවී විනිමය අනුපාත</span><span class="lang-en">Live Cross Rates</span></h3><div class="widget-card p-0" style="height: 565px; margin-top: 54px;"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>{ "width": "100%", "height": "100%", "currencies": [ "EUR", "USD", "JPY", "GBP", "CHF", "AUD", "CAD", "NZD" ], "isTransparent": true, "colorTheme": "dark", "locale": "en" }</script></div></div></div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="crypto-content" role="tabpanel">
+                <div class="mb-4" data-aos="fade-down"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>{ "symbols": [ { "proName": "BINANCE:BTCUSDT", "title": "Bitcoin" }, { "proName": "BINANCE:ETHUSDT", "title": "Ethereum" }, { "proName": "BINANCE:BNBUSDT", "title": "BNB" }, { "proName": "BINANCE:SOLUSDT", "title": "Solana" }, { "proName": "BINANCE:XRPUSDT", "title": "XRP" } ], "showSymbolLogo": true, "colorTheme": "dark", "isTransparent": false, "displayMode": "adaptive", "locale": "en" }</script></div></div>
+                <div class="mb-5" data-aos="fade-up"><h3 class="widget-title"><span class="lang-si">Crypto බුබුලු (Market Bubbles)</span><span class="lang-en">Crypto Market Bubbles</span></h3><div class="widget-card p-0" style="height: 700px; background: #000;"><iframe src="https://cryptobubbles.net" width="100%" height="100%" frameborder="0" style="transform: scale(0.95); transform-origin: center top;"></iframe></div></div>
+                <div class="row">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <h3 class="widget-title"><i class="fas fa-fish me-2 gold-text"></i><span class="lang-si">Whale Tracker (ලොකු ගනුදෙනු)</span><span class="lang-en">Global Whale Tracker</span></h3>
+                        <ul class="nav nav-pills tracker-tabs mb-0" id="whaleTabs" role="tablist"><li class="nav-item" role="presentation"><button class="nav-link active" id="exchange-whale-tab" data-bs-toggle="tab" data-bs-target="#exchange-whale" type="button" role="tab">Exchange Whales (Live)</button></li><li class="nav-item" role="presentation"><button class="nav-link" id="onchain-whale-tab" data-bs-toggle="tab" data-bs-target="#onchain-whale" type="button" role="tab">All Wallets (On-Chain)</button></li></ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="exchange-whale" role="tabpanel"><div class="tracker-box" style="border-top-left-radius: 0;"><div class="mb-2"><select class="form-select form-select-sm form-select-dark" id="crypto-pair-select" onchange="startTracker()"><option value="btcusdt" selected>Bitcoin (BTC/USDT)</option><option value="ethusdt">Ethereum (ETH/USDT)</option><option value="xrpusdt">Ripple (XRP/USDT)</option><option value="solusdt">Solana (SOL/USDT)</option></select><small class="text-muted opacity-75"><span class="lang-si">*ඩොලර් මිලියනයට ($1M) වැඩි ගනුදෙනු පමණි.</span><span class="lang-en">*Shows trades over $1 Million only.</span></small></div><div id="trade-feed"><div class="text-center text-muted mt-5 opacity-50">Hunting for $1M+ Whales... 🐋</div></div></div></div>
+                            <div class="tab-pane fade" id="onchain-whale" role="tabpanel"><div class="tracker-box" style="border-top-left-radius: 0; overflow-y: hidden; padding: 0;"><a class="twitter-timeline" data-lang="en" data-theme="dark" data-height="600" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/whale_alert?ref_src=twsrc%5Etfw">Loading On-Chain Data...</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left"><h3 class="widget-title"><span class="lang-si">සජීවී Crypto දත්ත (Screener)</span><span class="lang-en">Real-time Crypto Screener</span></h3><div class="widget-card p-0" style="height: 650px; margin-top: 38px;"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>{ "width": "100%", "height": "100%", "defaultColumn": "overview", "screener_type": "crypto_mkt", "displayCurrency": "USD", "colorTheme": "dark", "locale": "en", "isTransparent": true }</script></div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background-color: #050910; color: #ccd6f6; padding-top: 3rem;">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 mb-4"><h5 class="text-uppercase mb-4" style="color: var(--secondary-color); font-weight: 700;">RV ACADEMY</h5><p class="small opacity-75">Sri Lanka's #1 Free Forex & Crypto educational website.</p><div class="mt-3"><a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fab fa-youtube"></i></a><a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fab fa-telegram-plane"></i></a><a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fab fa-facebook-f"></i></a></div></div>
+                <div class="col-lg-4 col-md-6 mb-4"><h6 class="text-uppercase mb-4 font-weight-bold" style="color: var(--secondary-color);">Quick Links</h6><ul class="list-unstyled"><li class="mb-2"><a href="course.html" class="text-white text-decoration-none opacity-75">Free Course</a></li><li class="mb-2"><a href="vip.html" class="text-white text-decoration-none opacity-75">VIP Signals</a></li><li class="mb-2"><a href="legal.html" class="text-white text-decoration-none opacity-75">Risk & Terms</a></li></ul></div>
+                <div class="col-lg-4 col-md-6 mb-4"><h6 class="text-uppercase mb-4 font-weight-bold" style="color: var(--secondary-color);">Contact</h6><p class="small opacity-75"><i class="fas fa-envelope me-2"></i> info@rvacademy.com</p></div>
+            </div>
+        </div>
+        <div class="container-fluid p-3" style="background-color: #020408; border-top: 1px solid rgba(255,255,255,0.05);"><div class="container"><p class="text-muted mb-2" style="font-size: 0.75rem; text-align: justify; opacity: 0.6;"><strong style="color: #dc3545;">RISK WARNING:</strong> Trading involves high risk. Leverage can lead to losses. Only invest what you can afford to lose.</p><div class="text-center mt-3"><small class="opacity-50">© 2025 RV ACADEMY. All Rights Reserved.</small></div></div></div>
+    </footer>
+
+    <button onclick="topFunction()" id="backToTopBtn" title="Go to top" style="display: none; position: fixed; bottom: 25px; right: 25px; z-index: 99; border: none; outline: none; background-color: var(--secondary-color); color: var(--primary-color); cursor: pointer; padding: 12px 15px; border-radius: 50%; font-size: 18px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3);"><i class="fas fa-arrow-up"></i></button>
+
+    <div class="modal fade" id="telegramPopup" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content" style="background: linear-gradient(135deg, #0a192f 0%, #112240 100%); border: 2px solid var(--secondary-color); border-radius: 15px;"><div class="modal-header border-0"><h5 class="modal-title gold-text fw-bold">DON'T MISS OUT!</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-center text-white py-4"><i class="fas fa-bell fa-3x mb-3 gold-text"></i><h4><span class="lang-si">නොමිලේ සිග්නල් ලබාගන්න!</span><span class="lang-en">Get Free Daily Signals!</span></h4><p class="opacity-75 mb-4"><span class="lang-si">අපගේ ටෙලිග්‍රෑම් චැනලය සමග සම්බන්ධ වී දිනපතා නොමිලේ වෙළඳ සිග්නල් ලබාගන්න.</span><span class="lang-en">Join our official Telegram channel to get free daily trading signals.</span></p><a href="#" target="_blank" class="btn btn-gold btn-lg w-100" onclick="closePopupForever()">JOIN TELEGRAM NOW</a></div></div></div></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+        function updateTAGauge() {
+            const symbol = document.getElementById('ta-symbol-select').value;
+            const container = document.getElementById('ta-gauge-container');
+            container.innerHTML = '';
+            const widgetContainer = document.createElement('div'); widgetContainer.className = 'tradingview-widget-container';
+            const widgetDiv = document.createElement('div'); widgetDiv.className = 'tradingview-widget-container__widget';
+            widgetContainer.appendChild(widgetDiv);
+            const script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js';
+            script.innerHTML = JSON.stringify({ "interval": "1m", "width": "100%", "isTransparent": true, "height": "100%", "symbol": symbol, "showIntervalTabs": true, "displayMode": "single", "locale": "en", "colorTheme": "dark" });
+            widgetContainer.appendChild(script); container.appendChild(widgetContainer);
+        }
+        updateTAGauge();
+        let ws = null; const whaleThreshold = 1000000; const monsterWhaleThreshold = 5000000;
+        function createTradeHTML(p, q, tStr, isBuy, v) { let icon='🐋', rc=isBuy?'trade-buy':'trade-sell'; if(v>=monsterWhaleThreshold){icon='🦖';rc+=' whale-alert';} return `<div class="trade-row ${rc}"><div><span class="me-2 fs-5">${icon}</span><span class="opacity-50 me-2">[${tStr}]</span><span class="fw-bold">${isBuy?'BUY':'SELL'}</span></div><div><span class="fw-bold me-3">$${(v/1000000).toFixed(2)}M</span><span class="opacity-75">@ ${parseFloat(p).toFixed(2)}</span></div></div>`; }
+        async function startTracker() {
+            if(ws)ws.close(); const pair=document.getElementById('crypto-pair-select').value, feed=document.getElementById('trade-feed');
+            feed.innerHTML='<div class="text-center text-muted mt-5 opacity-50">Loading History... ⏳</div>';
+            try { const res=await fetch(`https://api.binance.com/api/v3/aggTrades?symbol=${pair.toUpperCase()}&limit=1000`); const data=await res.json(); feed.innerHTML=''; let fh=false;
+                for(let i=data.length-1;i>=0;i--){ const t=data[i], v=t.p*t.q; if(v>=whaleThreshold){ feed.innerHTML+=createTradeHTML(t.p,t.q,new Date(t.T).toLocaleTimeString(),!t.m,v); fh=true; } }
+                if(!fh)feed.innerHTML='<div class="text-center opacity-50 mt-5">No recent $1M+ trades.<br>Waiting for live...</div>'; else feed.innerHTML='<div class="text-center opacity-50 my-2 border-top border-bottom py-1"><small>--- LIVE CONNECTED ---</small></div>'+feed.innerHTML;
+            } catch(e){feed.innerHTML='<div class="text-center text-danger mt-5 opacity-50">Connecting Live...</div>';}
+            ws=new WebSocket(`wss://stream.binance.com:9443/ws/${pair}@aggTrade`);
+            ws.onmessage=(e)=>{ const d=JSON.parse(e.data), v=d.p*d.q; if(v>=whaleThreshold){ if(feed.querySelector('.text-center')?.innerText.includes('Waiting'))feed.innerHTML=''; feed.insertAdjacentHTML('afterbegin',createTradeHTML(d.p,d.q,new Date(d.T).toLocaleTimeString(),!d.m,v)); if(feed.children.length>100)feed.removeChild(feed.lastChild); } };
+        }
+        startTracker();
+        function updateSessions() {
+            const h=new Date().getUTCHours(), s={sydney:{s:22,e:7},tokyo:{s:0,e:9},london:{s:8,e:17},ny:{s:13,e:22}};
+            for(const[c,t]of Object.entries(s)){ let o=(t.s>t.e)?(h>=t.s||h<t.e):(h>=t.s&&h<t.e); document.getElementById(`session-${c}`).classList.toggle('active',o); document.getElementById(`status-${c}`).innerText=o?'OPEN':'CLOSED'; document.getElementById(`status-${c}`).className=`session-status ${o?'status-open':'status-closed'}`; }
+        }
+        setInterval(updateSessions,60000); updateSessions();
+        function setLanguage(l){ localStorage.setItem('preferredLang',l); if(l==='en'){document.body.classList.add('english-mode');document.getElementById('btn-si').classList.remove('active');document.getElementById('btn-en').classList.add('active');}else{document.body.classList.remove('english-mode');document.getElementById('btn-en').classList.remove('active');document.getElementById('btn-si').classList.add('active');}}
+        if(localStorage.getItem('preferredLang')==='en'){setLanguage('en');}
+        let mybutton = document.getElementById("backToTopBtn"); window.onscroll = function() { if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) { mybutton.style.display = "block"; } else { mybutton.style.display = "none"; } }; function topFunction() { document.body.scrollTop = 0; document.documentElement.scrollTop = 0; }
+        if (!localStorage.getItem('rv_telegram_popup_seen')) { setTimeout(() => { new bootstrap.Modal(document.getElementById('telegramPopup')).show(); }, 10000); }
+        function closePopupForever() { localStorage.setItem('rv_telegram_popup_seen', 'true'); bootstrap.Modal.getInstance(document.getElementById('telegramPopup')).hide(); }
+    </script>
+</body>
+</html>

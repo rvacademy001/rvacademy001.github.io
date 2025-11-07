@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RV ACADEMY - Trading Tools</title>
+    <meta name="description" content="Free Forex & Crypto Trading Tools. Position Size Calculator, Pip Value, and Live Crypto Converter.">
+    <meta property="og:title" content="Trading Tools - RV ACADEMY">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XXXXXXXXXX');</script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary-color: #0a192f; --secondary-color: #D4AF37; --text-light: #ccd6f6; --bg-dark-lighter: #112240; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--primary-color); color: var(--text-light); padding-top: 80px; overflow-x: hidden; }
+        a { text-decoration: none; }
+        .navbar { background-color: rgba(10, 25, 47, 0.95) !important; backdrop-filter: blur(10px); padding: 15px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
+        .navbar-brand { font-weight: 700; font-size: 1.8rem; color: var(--secondary-color) !important; letter-spacing: 1px; }
+        .nav-link { color: var(--text-light) !important; font-weight: 500; margin-left: 15px; transition: 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--secondary-color) !important; }
+        .dropdown-menu { background: #0a192f; border: 1px solid var(--secondary-color); }
+        .dropdown-menu .dropdown-item { color: var(--text-light); }
+        .dropdown-menu .dropdown-item:hover { background-color: var(--secondary-color); color: var(--primary-color); }
+        .btn-gold { background-color: var(--secondary-color); color: var(--primary-color); font-weight: 700; border-radius: 30px; padding: 8px 25px; transition: 0.3s; border: 2px solid var(--secondary-color); }
+        .btn-gold:hover { background-color: transparent; color: var(--secondary-color); }
+        .tools-header { background: linear-gradient(135deg, #112240 0%, #0a192f 100%); padding: 60px 0; text-align: center; border-bottom: 3px solid var(--secondary-color); }
+        .gold-text { color: var(--secondary-color); }
+        .calculator-card { background: var(--bg-dark-lighter); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .form-label { color: var(--secondary-color); font-weight: 600; font-size: 0.9rem; }
+        .form-control, .form-select { background-color: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff; }
+        .form-control:focus, .form-select:focus { background-color: rgba(0,0,0,0.5); border-color: var(--secondary-color); color: #fff; box-shadow: none; }
+        .form-select option { background-color: #112240; color: #fff; } 
+        .result-box { background: rgba(212, 175, 55, 0.1); border: 1px dashed var(--secondary-color); border-radius: 10px; padding: 20px; text-align: center; margin-top: 20px; }
+        .result-value { font-size: 2.5rem; font-weight: 800; color: var(--secondary-color); }
+        .result-label { opacity: 0.7; font-size: 0.9rem; }
+        .pip-info { font-size: 0.8rem; opacity: 0.5; margin-top: 5px; }
+        .tool-section { display: none; animation: fadeIn 0.3s ease-in-out; }
+        #pos-size-calc { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        #current-price-container { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .lang-en { display: none; } body.english-mode .lang-si { display: none !important; } body.english-mode .lang-en { display: inline-block !important; }
+        .lang-switch { cursor: pointer; opacity: 0.5; transition: 0.3s; } .lang-switch.active { opacity: 1; font-weight: bold; color: var(--secondary-color) !important; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-chart-line me-2"></i> RV ACADEMY</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><span class="lang-si">මුල් පිටුව</span><span class="lang-en">Home</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="course.html"><span class="lang-si">පාඨමාලාව</span><span class="lang-en">Course</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="ea.html"><span class="lang-si">Free EA</span><span class="lang-en">Free EA</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="vip.html"><span class="lang-si">VIP</span><span class="lang-en">VIP</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="tools.html"><span class="lang-si">Tools</span><span class="lang-en">Tools</span></a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><span class="lang-si">තවත්</span><span class="lang-en">More</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="analysis.html"><i class="fas fa-chart-pie me-2"></i> <span class="lang-si">විශ්ලේෂණ</span><span class="lang-en">Analysis</span></a></li>
+                            <li><a class="dropdown-item" href="blog.html"><i class="fas fa-newspaper me-2"></i> <span class="lang-si">බ්ලොග්</span><span class="lang-en">Blog</span></a></li>
+                            <li><hr class="dropdown-divider" style="background: rgba(255,255,255,0.1);"></li>
+                            <li><a class="dropdown-item" href="about.html"><i class="fas fa-info-circle me-2"></i> <span class="lang-si">අපි ගැන</span><span class="lang-en">About Us</span></a></li>
+                            <li><a class="dropdown-item" href="faq.html"><i class="fas fa-question-circle me-2"></i> <span class="lang-si">ගැටළු (FAQ)</span><span class="lang-en">FAQ</span></a></li>
+                            <li><a class="dropdown-item" href="contact.html"><i class="fas fa-envelope me-2"></i> <span class="lang-si">සම්බන්ධ වීමට</span><span class="lang-en">Contact Us</span></a></li>
+                            <li><a class="dropdown-item" href="legal.html"><i class="fas fa-shield-alt me-2"></i> <span class="lang-si">නීතිමය</span><span class="lang-en">Legal</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-lg-3"><a href="vip.html" class="btn btn-gold btn-sm"><span class="lang-si">JOIN VIP</span><span class="lang-en">JOIN VIP</span></a></li>
+                    <li class="nav-item ms-3 border-start ps-3 d-none d-lg-block" style="border-color: rgba(255,255,255,0.1) !important;"></li>
+                    <li class="nav-item d-flex align-items-center"><span class="nav-link lang-switch active" id="btn-si" onclick="setLanguage('si')">SIN</span><span class="nav-link opacity-50 px-0">|</span><span class="nav-link lang-switch" id="btn-en" onclick="setLanguage('en')">ENG</span></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="tools-header" data-aos="fade-down">
+        <div class="container">
+            <h1 class="display-4 fw-bold"><i class="fas fa-calculator me-3"></i><span class="gold-text">TRADING TOOLS</span></h1>
+            <p class="lead opacity-75"><span class="lang-si">ඔබේ Trading පහසු කරන වටිනා මෙවලම් නොමිලේ.</span><span class="lang-en">Advanced tools to make your trading easier and smarter.</span></p>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="mb-4" data-aos="fade-up">
+                    <label class="form-label text-white"><i class="fas fa-hand-pointer me-2"></i><span class="lang-si">අවශ්‍ය Tool එක තෝරන්න:</span><span class="lang-en">Select a Tool:</span></label>
+                    <select class="form-select form-select-lg" id="tool-selector" onchange="switchTool()" style="border-color: var(--secondary-color);">
+                        <optgroup label="FOREX TOOLS"><option value="pos-size-calc" selected>🔵 Position Size Calculator (Risk)</option><option value="pip-val-calc">🟢 Pip Value Calculator</option><option value="pnl-calc">🟠 Profit & Loss Calculator</option></optgroup>
+                        <optgroup label="CRYPTO TOOLS"><option value="crypto-conv">🟡 Crypto Converter</option><option value="crypto-price">🟣 Live Crypto Prices (Binance)</option></optgroup>
+                    </select>
+                </div>
+                <div class="calculator-card" data-aos="zoom-in">
+                    <div id="pos-size-calc" class="tool-section"><h3 class="text-center mb-4 fw-bold"><span class="lang-si">Lot Size ගණක යන්ත්‍රය</span><span class="lang-en">Position Size Calculator</span></h3><form><div class="row g-3"><div class="col-12"><label class="form-label">Currency Pair</label><select class="form-select" id="pos-pair" onchange="updatePriceInput('pos'); calculatePosition();"><option value="USD_QUOTE" selected>EUR/USD, GBP/USD...</option><option value="USDJPY">USD/JPY</option><option value="USDCAD">USD/CAD</option></select></div><div class="col-12" id="pos-price-box" style="display:none;"><label class="form-label text-warning">Current Price</label><input type="number" class="form-control border-warning" id="pos-price" placeholder="Ex: 150.00" oninput="calculatePosition()"></div><div class="col-md-6"><label class="form-label">Balance ($)</label><input type="number" class="form-control" id="pos-balance" placeholder="1000" oninput="calculatePosition()"></div><div class="col-md-6"><label class="form-label">Risk (%)</label><input type="number" class="form-control" id="pos-risk" placeholder="2" oninput="calculatePosition()"></div><div class="col-12"><label class="form-label">Stop Loss (Pips)</label><input type="number" class="form-control" id="pos-sl" placeholder="30" oninput="calculatePosition()"></div></div><div class="result-box mt-4"><div class="row"><div class="col-6 border-end border-secondary"><div class="result-label">Risk Amount</div><div class="result-value text-white" style="font-size: 1.8rem;">$<span id="pos-risk-amt">0.00</span></div></div><div class="col-6"><div class="result-label">Lots</div><div class="result-value" id="pos-lots">0.00</div></div></div></div></form></div>
+                    <div id="pip-val-calc" class="tool-section"><h3 class="text-center mb-4 fw-bold"><span class="lang-si">Pip වටිනාකම ගණනය කිරීම</span><span class="lang-en">Pip Value Calculator</span></h3><form><div class="row g-3"><div class="col-12"><label class="form-label">Currency Pair</label><select class="form-select" id="pip-pair" onchange="updatePriceInput('pip'); calculatePip();"><option value="USD_QUOTE" selected>EUR/USD, GBP/USD...</option><option value="USDJPY">USD/JPY</option><option value="USDCAD">USD/CAD</option></select></div><div class="col-12" id="pip-price-box" style="display:none;"><label class="form-label text-warning">Current Price</label><input type="number" class="form-control border-warning" id="pip-price" placeholder="Ex: 150.00" oninput="calculatePip()"></div><div class="col-12"><label class="form-label">Lots</label><input type="number" class="form-control" id="pip-lots" placeholder="1.00" oninput="calculatePip()"></div></div><div class="result-box mt-4"><div class="result-label">Pip Value (USD)</div><div class="result-value text-success">$<span id="pip-result">0.00</span></div></div></form></div>
+                    <div id="pnl-calc" class="tool-section"><h3 class="text-center mb-4 fw-bold"><span class="lang-si">ලාභ/අලාභ ගණනය කිරීම</span><span class="lang-en">Profit & Loss Calculator</span></h3><form><div class="row g-3"><div class="col-md-6"><label class="form-label">Pair</label><select class="form-select" id="pnl-pair" onchange="calculatePnL()"><option value="USD_QUOTE" selected>EUR/USD, GBP/USD...</option><option value="JPY_QUOTE">USD/JPY...</option></select></div><div class="col-md-6"><label class="form-label">Type</label><select class="form-select" id="pnl-type" onchange="calculatePnL()"><option value="buy">BUY</option><option value="sell">SELL</option></select></div><div class="col-md-6"><label class="form-label">Lots</label><input type="number" class="form-control" id="pnl-lots" placeholder="1.00" oninput="calculatePnL()"></div><div class="col-md-6"><label class="form-label">Open Price</label><input type="number" class="form-control" id="pnl-open" placeholder="1.1000" oninput="calculatePnL()"></div><div class="col-12"><label class="form-label">Close Price</label><input type="number" class="form-control" id="pnl-close" placeholder="1.1050" oninput="calculatePnL()"></div></div><div class="result-box mt-4"><div class="row"><div class="col-6 border-end border-secondary"><div class="result-label">Pips</div><div class="result-value text-white" style="font-size: 1.8rem;"><span id="pnl-pips">0</span></div></div><div class="col-6"><div class="result-label">Profit/Loss ($)</div><div class="result-value" id="pnl-result">$0.00</div></div></div></div></form></div>
+                    <div id="crypto-conv" class="tool-section"><h3 class="text-center mb-4 fw-bold"><span class="lang-si">Crypto මුදල් පරිවර්තකය</span><span class="lang-en">Crypto Converter</span></h3><form><div class="row g-3"><div class="col-md-6"><label class="form-label">Amount</label><input type="number" class="form-control" id="crypto-amount" placeholder="1" value="1" oninput="convertCrypto()"></div><div class="col-md-6"><label class="form-label">From</label><select class="form-select" id="crypto-from" onchange="convertCrypto()"><option value="bitcoin" selected>Bitcoin (BTC)</option><option value="ethereum">Ethereum (ETH)</option><option value="tether">Tether (USDT)</option></select></div><div class="col-12 text-center py-2"><i class="fas fa-arrow-down gold-text"></i></div><div class="col-12"><label class="form-label">To</label><select class="form-select" id="crypto-to" onchange="convertCrypto()"><option value="usd" selected>USD ($)</option><option value="lkr">LKR (රු)</option></select></div></div><div class="result-box mt-4"><div class="result-label">Value</div><div class="result-value" id="crypto-result">...</div><div class="pip-info" id="crypto-rate-info">Updating...</div></div></form></div>
+                    <div id="crypto-price" class="tool-section"><h3 class="text-center mb-4 fw-bold"><span class="lang-si">සජීවී Crypto මිල ගණන් (Binance)</span><span class="lang-en">Live Binance Prices</span></h3><div class="tradingview-widget-container mb-4"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>{ "symbols": [ { "proName": "BINANCE:BTCUSDT", "title": "Bitcoin" }, { "proName": "BINANCE:ETHUSDT", "title": "Ethereum" }, { "proName": "BINANCE:BNBUSDT", "title": "BNB" }, { "proName": "BINANCE:XRPUSDT", "title": "XRP" } ], "showSymbolLogo": true, "colorTheme": "dark", "isTransparent": false, "displayMode": "adaptive", "locale": "en" }</script></div><div class="tradingview-widget-container" style="height: 500px"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>{ "colorTheme": "dark", "dateRange": "12M", "showChart": false, "locale": "en", "largeChartUrl": "", "isTransparent": false, "showSymbolLogo": true, "showFloatingTooltip": false, "width": "100%", "height": "100%", "tabs": [ { "title": "Crypto (Binance)", "symbols": [ { "s": "BINANCE:BTCUSDT", "d": "Bitcoin" }, { "s": "BINANCE:ETHUSDT", "d": "Ethereum" }, { "s": "BINANCE:BNBUSDT", "d": "BNB" }, { "s": "BINANCE:XRPUSDT", "d": "XRP" } ], "originalTitle": "Indices" } ] }</script></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background-color: #050910; color: #ccd6f6; padding-top: 3rem;">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 mb-4"><h5 class="text-uppercase mb-4" style="color: var(--secondary-color); font-weight: 700;">RV ACADEMY</h5><p class="small opacity-75">Sri Lanka's #1 Free Forex & Crypto educational website.</p><div class="mt-3"><a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fab fa-youtube"></i></a><a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fab fa-telegram-plane"></i></a><a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fab fa-facebook-f"></i></a></div></div>
+                <div class="col-lg-4 col-md-6 mb-4"><h6 class="text-uppercase mb-4 font-weight-bold" style="color: var(--secondary-color);">Quick Links</h6><ul class="list-unstyled"><li class="mb-2"><a href="course.html" class="text-white text-decoration-none opacity-75">Free Course</a></li><li class="mb-2"><a href="vip.html" class="text-white text-decoration-none opacity-75">VIP Signals</a></li><li class="mb-2"><a href="legal.html" class="text-white text-decoration-none opacity-75">Risk & Terms</a></li></ul></div>
+                <div class="col-lg-4 col-md-6 mb-4"><h6 class="text-uppercase mb-4 font-weight-bold" style="color: var(--secondary-color);">Contact</h6><p class="small opacity-75"><i class="fas fa-envelope me-2"></i> info@rvacademy.com</p></div>
+            </div>
+        </div>
+        <div class="container-fluid p-3" style="background-color: #020408; border-top: 1px solid rgba(255,255,255,0.05);"><div class="container"><p class="text-muted mb-2" style="font-size: 0.75rem; text-align: justify; opacity: 0.6;"><strong style="color: #dc3545;">RISK WARNING:</strong> Trading involves high risk. Leverage can lead to losses. Only invest what you can afford to lose.</p><div class="text-center mt-3"><small class="opacity-50">© 2025 RV ACADEMY. All Rights Reserved.</small></div></div></div>
+    </footer>
+
+    <button onclick="topFunction()" id="backToTopBtn" title="Go to top" style="display: none; position: fixed; bottom: 25px; right: 25px; z-index: 99; border: none; outline: none; background-color: var(--secondary-color); color: var(--primary-color); cursor: pointer; padding: 12px 15px; border-radius: 50%; font-size: 18px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3);"><i class="fas fa-arrow-up"></i></button>
+
+    <div class="modal fade" id="telegramPopup" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content" style="background: linear-gradient(135deg, #0a192f 0%, #112240 100%); border: 2px solid var(--secondary-color); border-radius: 15px;"><div class="modal-header border-0"><h5 class="modal-title gold-text fw-bold">DON'T MISS OUT!</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-center text-white py-4"><i class="fas fa-bell fa-3x mb-3 gold-text"></i><h4><span class="lang-si">නොමිලේ සිග්නල් ලබාගන්න!</span><span class="lang-en">Get Free Daily Signals!</span></h4><p class="opacity-75 mb-4"><span class="lang-si">අපගේ ටෙලිග්‍රෑම් චැනලය සමග සම්බන්ධ වී දිනපතා නොමිලේ වෙළඳ සිග්නල් ලබාගන්න.</span><span class="lang-en">Join our official Telegram channel to get free daily trading signals.</span></p><a href="#" target="_blank" class="btn btn-gold btn-lg w-100" onclick="closePopupForever()">JOIN TELEGRAM NOW</a></div></div></div></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+        function switchTool() { document.querySelectorAll('.tool-section').forEach(el => el.style.display = 'none'); document.getElementById(document.getElementById('tool-selector').value).style.display = 'block'; }
+        function updatePriceInput(prefix) { const pair = document.getElementById(prefix + '-pair').value; document.getElementById(prefix + '-price-box').style.display = (pair === 'USD_QUOTE') ? 'none' : 'block'; }
+        function calculatePosition() { const b=parseFloat(document.getElementById('pos-balance').value)||0, r=parseFloat(document.getElementById('pos-risk').value)||0, sl=parseFloat(document.getElementById('pos-sl').value)||0, p=document.getElementById('pos-pair').value; let cp=parseFloat(document.getElementById('pos-price').value); if(!cp) cp=(p==='USDJPY')?150.00:(p==='USDCAD'?1.35:1); if(b>0&&r>0&&sl>0){const ra=b*(r/100);document.getElementById('pos-risk-amt').innerText=ra.toFixed(2);let pv=10;if(p==='USDJPY')pv=1000/cp;else if(p==='USDCAD')pv=10/cp;document.getElementById('pos-lots').innerText=(ra/(sl*pv)).toFixed(2);} }
+        function calculatePip() { const l=parseFloat(document.getElementById('pip-lots').value)||0, p=document.getElementById('pip-pair').value; let cp=parseFloat(document.getElementById('pip-price').value)||1; if(!cp && p!=='USD_QUOTE') cp=(p==='USDJPY')?150.00:1.35; let pv=10; if(p==='USDJPY')pv=1000/cp;else if(p==='USDCAD')pv=10/cp; document.getElementById('pip-result').innerText=(pv*l).toFixed(2); }
+        function calculatePnL() { const t=document.getElementById('pnl-type').value, l=parseFloat(document.getElementById('pnl-lots').value)||0, o=parseFloat(document.getElementById('pnl-open').value)||0, c=parseFloat(document.getElementById('pnl-close').value)||0, p=document.getElementById('pnl-pair').value; if(l>0&&o>0&&c>0){const m=(p==='JPY_QUOTE')?100:10000, pips=(t==='buy')?(c-o)*m:(o-c)*m;document.getElementById('pnl-pips').innerText=pips.toFixed(1);const pnl=pips*l*10; const el=document.getElementById('pnl-result'); el.innerText="$"+pnl.toFixed(2); el.className=pnl>=0?"result-value text-success":"result-value text-danger";} }
+        let cryptoRates={}; async function fetchCryptoRates(){try{const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether&vs_currencies=usd,lkr');cryptoRates=await r.json();convertCrypto();}catch(e){document.getElementById('crypto-result').innerText="Error";}}
+        function convertCrypto(){const a=parseFloat(document.getElementById('crypto-amount').value)||0, f=document.getElementById('crypto-from').value, t=document.getElementById('crypto-to').value; if(cryptoRates[f]&&cryptoRates[f][t]){const r=cryptoRates[f][t], res=a*r, s=(t==='lkr')?"Rs. ":(t==='eur')?"€ ":(t==='gbp')?"£ ":"$";document.getElementById('crypto-result').innerText=s+res.toLocaleString(undefined,{maximumFractionDigits:2});document.getElementById('crypto-rate-info').innerText=`Live Rate: 1 ${f.toUpperCase()} = ${s}${r.toLocaleString()}`;}else{document.getElementById('crypto-result').innerText="...";}}
+        fetchCryptoRates(); setInterval(fetchCryptoRates,60000);
+        function setLanguage(lang) { localStorage.setItem('preferredLang', lang); if (lang === 'en') { document.body.classList.add('english-mode'); document.getElementById('btn-si').classList.remove('active'); document.getElementById('btn-en').classList.add('active'); } else { document.body.classList.remove('english-mode'); document.getElementById('btn-en').classList.remove('active'); document.getElementById('btn-si').classList.add('active'); } }
+        if (localStorage.getItem('preferredLang') === 'en') { setLanguage('en'); }
+        let mybutton = document.getElementById("backToTopBtn"); window.onscroll = function() { if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) { mybutton.style.display = "block"; } else { mybutton.style.display = "none"; } }; function topFunction() { document.body.scrollTop = 0; document.documentElement.scrollTop = 0; }
+        if (!localStorage.getItem('rv_telegram_popup_seen')) { setTimeout(() => { new bootstrap.Modal(document.getElementById('telegramPopup')).show(); }, 10000); }
+        function closePopupForever() { localStorage.setItem('rv_telegram_popup_seen', 'true'); bootstrap.Modal.getInstance(document.getElementById('telegramPopup')).hide(); }
+    </script>
+</body>
+</html>
