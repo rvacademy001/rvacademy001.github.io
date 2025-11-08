@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rvacademyprasha.github.io/sitemap.xml
