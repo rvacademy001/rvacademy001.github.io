@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RV ACADEMY - Trading Quiz</title>
+    <meta name="description" content="Test your Forex & Crypto trading knowledge with RV Academy's interactive quiz.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K4KKB6VCNN"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-K4KKB6VCNN');</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary-color: #0a192f; --secondary-color: #D4AF37; --text-light: #ccd6f6; --bg-dark-lighter: #112240; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--primary-color); color: var(--text-light); padding-top: 80px; overflow-x: hidden; }
+        a { text-decoration: none; }
+        .navbar { background-color: rgba(10, 25, 47, 0.95) !important; backdrop-filter: blur(10px); padding: 15px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
+        .navbar-brand { font-weight: 700; font-size: 1.8rem; color: var(--secondary-color) !important; letter-spacing: 1px; }
+        .nav-link { color: var(--text-light) !important; font-weight: 500; margin-left: 15px; transition: 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--secondary-color) !important; }
+        .dropdown-menu { background: #0a192f; border: 1px solid var(--secondary-color); }
+        .dropdown-menu .dropdown-item { color: var(--text-light); }
+        .dropdown-menu .dropdown-item:hover { background-color: var(--secondary-color); color: var(--primary-color); }
+        .btn-gold { background-color: var(--secondary-color); color: var(--primary-color); font-weight: 700; border-radius: 30px; padding: 8px 25px; transition: 0.3s; border: 2px solid var(--secondary-color); }
+        .btn-gold:hover { background-color: transparent; color: var(--secondary-color); }
+        .quiz-header { background: linear-gradient(135deg, #112240 0%, #0a192f 100%); padding: 60px 0; text-align: center; border-bottom: 3px solid var(--secondary-color); }
+        .gold-text { color: var(--secondary-color); }
+        /* QUIZ STYLES */
+        .quiz-container { background: var(--bg-dark-lighter); border: 1px solid var(--secondary-color); border-radius: 20px; padding: 30px; max-width: 800px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .question-text { font-size: 1.5rem; font-weight: 600; margin-bottom: 30px; color: #fff; }
+        .option-btn { display: block; width: 100%; padding: 15px 20px; margin-bottom: 15px; text-align: left; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-light); border-radius: 10px; transition: 0.3s; font-size: 1.1rem; }
+        .option-btn:hover { background: rgba(212, 175, 55, 0.1); border-color: var(--secondary-color); color: var(--secondary-color); }
+        .option-btn.correct { background: rgba(37, 211, 102, 0.2) !important; border-color: #25D366 !important; color: #fff !important; }
+        .option-btn.wrong { background: rgba(255, 82, 82, 0.2) !important; border-color: #ff5252 !important; color: #fff !important; }
+        .score-box { text-align: center; display: none; animation: fadeIn 0.5s; }
+        .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 5px solid var(--secondary-color); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; margin: 0 auto 30px; color: var(--secondary-color); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .lang-en { display: none; } body.english-mode .lang-si { display: none !important; } body.english-mode .lang-en { display: inline-block !important; }
+        .lang-switch { cursor: pointer; opacity: 0.5; transition: 0.3s; } .lang-switch.active { opacity: 1; font-weight: bold; color: var(--secondary-color) !important; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-chart-line me-2"></i> RV ACADEMY</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><span class="lang-si">මුල් පිටුව</span><span class="lang-en">Home</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="course.html"><span class="lang-si">පාඨමාලාව</span><span class="lang-en">Course</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="ea.html"><span class="lang-si">Free EA</span><span class="lang-en">Free EA</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="vip.html"><span class="lang-si">VIP</span><span class="lang-en">VIP</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="tools.html"><span class="lang-si">Tools</span><span class="lang-en">Tools</span></a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"><span class="lang-si">තවත්</span><span class="lang-en">More</span></a>
+                        <ul class="dropdown-menu" style="background: #0a192f; border: 1px solid var(--secondary-color);">
+                            <li><a class="dropdown-item text-light" href="analysis.html"><i class="fas fa-chart-pie me-2"></i> <span class="lang-si">විශ්ලේෂණ</span><span class="lang-en">Analysis</span></a></li>
+                            <li><a class="dropdown-item text-light" href="blog.html"><i class="fas fa-newspaper me-2"></i> <span class="lang-si">බ්ලොග්</span><span class="lang-en">Blog</span></a></li>
+                            <li><a class="dropdown-item text-light active" href="quiz.html"><i class="fas fa-brain me-2"></i> <span class="lang-si">ප්‍රශ්න විචාරය</span><span class="lang-en">Quiz</span></a></li>
+                            <li><hr class="dropdown-divider" style="background: rgba(255,255,255,0.1);"></li>
+                            <li><a class="dropdown-item text-light" href="about.html"><i class="fas fa-info-circle me-2"></i> <span class="lang-si">අපි ගැන</span><span class="lang-en">About Us</span></a></li>
+                            <li><a class="dropdown-item text-light" href="faq.html"><i class="fas fa-question-circle me-2"></i> <span class="lang-si">ගැටළු (FAQ)</span><span class="lang-en">FAQ</span></a></li>
+                            <li><a class="dropdown-item text-light" href="contact.html"><i class="fas fa-envelope me-2"></i> <span class="lang-si">සම්බන්ධ වීමට</span><span class="lang-en">Contact Us</span></a></li>
+                            <li><a class="dropdown-item text-light" href="legal.html"><i class="fas fa-shield-alt me-2"></i> <span class="lang-si">නීතිමය</span><span class="lang-en">Legal</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-lg-3"><a href="vip.html" class="btn btn-gold btn-sm"><span class="lang-si">JOIN VIP</span><span class="lang-en">JOIN VIP</span></a></li>
+                    <li class="nav-item ms-3 border-start ps-3 d-none d-lg-block" style="border-color: rgba(255,255,255,0.1) !important;"></li>
+                    <li class="nav-item d-flex align-items-center"><span class="nav-link lang-switch active" id="btn-si" onclick="setLanguage('si')">SIN</span><span class="nav-link opacity-50 px-0">|</span><span class="nav-link lang-switch" id="btn-en" onclick="setLanguage('en')">ENG</span></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="quiz-header" data-aos="fade-down">
+        <div class="container">
+            <h1 class="display-4 fw-bold"><span class="lang-si">දැනුම මිනුම</span><span class="lang-en">TRADING QUIZ</span></h1>
+            <p class="lead opacity-75"><span class="lang-si">ඔබේ Trading දැනුම පරීක්ෂා කර බලන්න.</span><span class="lang-en">Test your trading knowledge.</span></p>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="quiz-container" data-aos="zoom-in">
+            <div id="quiz-box">
+                <div class="d-flex justify-content-between mb-4 opacity-50">
+                    <span><span class="lang-si">ප්‍රශ්නය</span><span class="lang-en">Question</span> <span id="q-num">1</span> / 5</span>
+                    <span>Score: <span id="current-score">0</span></span>
+                </div>
+                <h4 class="question-text" id="question">Loading Question...</h4>
+                <div id="options">
+                    </div>
+            </div>
+
+            <div id="score-box" class="score-box">
+                <h2 class="mb-4 gold-text"><span class="lang-si">විචාරය අවසන්!</span><span class="lang-en">Quiz Completed!</span></h2>
+                <div class="score-circle">
+                    <span id="final-score">0</span>/5
+                </div>
+                <h4 id="score-msg" class="mb-4 text-white"></h4>
+                <div id="score-cta"></div>
+                <button class="btn btn-outline-light mt-3" onclick="location.reload()"><i class="fas fa-redo me-2"></i> <span class="lang-si">නැවත උත්සාහ කරන්න</span><span class="lang-en">Try Again</span></button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black text-center py-4 mt-auto"><div class="container"><p class="mb-0 text-muted small">© 2025 RV ACADEMY. All Rights Reserved.</p></div></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        // --- QUIZ DATA & LOGIC ---
+        const questions = [
+            {
+                q_si: "Forex වෙළඳපොළේ වැඩිපුරම ගනුදෙනු වන මුදල් යුගලය කුමක්ද?",
+                q_en: "What is the most traded currency pair in the Forex market?",
+                options: ["GBP/USD", "EUR/USD", "USD/JPY", "AUD/USD"],
+                correct: 1 // Index of correct answer (EUR/USD is at index 1)
+            },
+            {
+                q_si: "Trend එකක් ඉහළට යන විට එය හඳුන්වන්නේ කුමන නමකින්ද?",
+                q_en: "What do you call a market trend that is going upwards?",
+                options: ["Bearish Trend", "Sideways Trend", "Bullish Trend", "Neutral Trend"],
+                correct: 2
+            },
+            {
+                q_si: "අපගේ ගිණුමේ ආරක්ෂාව සඳහා භාවිතා කළ යුතු වැදගත්ම Order වර්ගය කුමක්ද?",
+                q_en: "What is the most important order type to protect your account?",
+                options: ["Take Profit (TP)", "Stop Loss (SL)", "Buy Limit", "Sell Stop"],
+                correct: 1
+            },
+            {
+                q_si: "'Pip' එකක් යනු කුමක්ද?",
+                q_en: "What is a 'Pip'?",
+                options: ["Percentage in Point", "Price Interest Point", "Profit Investment Plan", "Pair Indicator Point"],
+                correct: 0
+            },
+            {
+                q_si: "සාර්ථක Trader කෙනෙකු වීමට වඩාත්ම වැදගත් දේ කුමක්ද?",
+                q_en: "What is most important to become a successful trader?",
+                options: ["100% නිවැරදි Strategy එකක්", "ලොකු Capital එකක්", "Risk Management & Psychology", "හැම වෙලාවෙම Trade කිරීම"],
+                correct: 2
+            }
+        ];
+
+        let currentQ = 0;
+        let score = 0;
+        let langMode = localStorage.getItem('preferredLang') || 'si';
+
+        function loadQuestion() {
+            const q = questions[currentQ];
+            document.getElementById('q-num').innerText = currentQ + 1;
+            // Determine which language question to show based on current mode
+            const isEng = document.body.classList.contains('english-mode');
+            document.getElementById('question').innerText = isEng ? q.q_en : q.q_si;
+
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = ''; // Clear old options
+
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(index, btn);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected, btnElement) {
+            // Disable all buttons after selection
+            const allOpts = document.querySelectorAll('.option-btn');
+            allOpts.forEach(btn => btn.disabled = true);
+
+            if (selected === questions[currentQ].correct) {
+                btnElement.classList.add('correct');
+                score++;
+                document.getElementById('current-score').innerText = score;
+            } else {
+                btnElement.classList.add('wrong');
+                // Show correct answer
+                allOpts[questions[currentQ].correct].classList.add('correct');
+            }
+
+            // Next question after 1.5s
+            setTimeout(() => {
+                currentQ++;
+                if (currentQ < questions.length) {
+                    loadQuestion();
+                } else {
+                    showResults();
+                }
+            }, 1500);
+        }
+
+        function showResults() {
+            document.getElementById('quiz-box').style.display = 'none';
+            document.getElementById('score-box').style.display = 'block';
+            document.getElementById('final-score').innerText = score;
+
+            const msg = document.getElementById('score-msg');
+            const cta = document.getElementById('score-cta');
+            const isEng = document.body.classList.contains('english-mode');
+
+            if (score >= 4) {
+                msg.innerHTML = isEng ? "Excellent! You are ready to trade." : "සුපිරි! ඔබ Trading වලට සූදානම්.";
+                cta.innerHTML = `<a href="vip.html" class="btn btn-gold btn-lg pulse-anim"><i class="fas fa-gem me-2"></i> ${isEng ? 'JOIN VIP NOW' : 'දැන්ම VIP එකට එන්න'}</a>`;
+            } else if (score >= 2) {
+                msg.innerHTML = isEng ? "Good, but you need a little more practice." : "හොඳයි, නමුත් තව පොඩි පුහුණුවක් අවශ්‍යයි.";
+                cta.innerHTML = `<a href="course.html" class="btn btn-primary btn-lg"><i class="fas fa-play-circle me-2"></i> ${isEng ? 'WATCH FREE COURSE' : 'නොමිලේ පාඨමාලාව බලන්න'}</a>`;
+            } else {
+                msg.innerHTML = isEng ? "Don't worry, start learning from basics." : "කණගාටු වෙන්න එපා, මුල සිට ඉගෙන ගමු.";
+                cta.innerHTML = `<a href="course.html" class="btn btn-primary btn-lg"><i class="fas fa-graduation-cap me-2"></i> ${isEng ? 'START LEARNING' : 'ඉගෙනීම අරඹන්න'}</a>`;
+            }
+        }
+
+        // --- LANGUAGE & COMMON SCRIPTS ---
+        function setLanguage(lang) { localStorage.setItem('preferredLang', lang); langMode=lang; if(lang==='en'){document.body.classList.add('english-mode');document.getElementById('btn-si').classList.remove('active');document.getElementById('btn-en').classList.add('active');}else{document.body.classList.remove('english-mode');document.getElementById('btn-en').classList.remove('active');document.getElementById('btn-si').classList.add('active');} loadQuestion(); }
+        if(localStorage.getItem('preferredLang')==='en'){setLanguage('en');}else{loadQuestion();} // Load initial question
+        let mybutton=document.getElementById("backToTopBtn"); window.onscroll=function(){if(document.body.scrollTop>300||document.documentElement.scrollTop>300){mybutton.style.display="block";}else{mybutton.style.display="none";}}; function topFunction(){document.body.scrollTop=0;document.documentElement.scrollTop=0;}
+        if(!localStorage.getItem('rv_telegram_popup_seen')){setTimeout(()=>{new bootstrap.Modal(document.getElementById('telegramPopup')).show();},10000);}
+        function closePopupForever(){localStorage.setItem('rv_telegram_popup_seen','true');bootstrap.Modal.getInstance(document.getElementById('telegramPopup')).hide();}
+    </script>
+    <script type="text/javascript">var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date();(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/690ed383a2e13a195dc65862/1j9gukfg1';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();</script>
+</body>
+</html>
