@@ -98,7 +98,7 @@
     <script>
         AOS.init({ duration: 800, once: true });
         
-        // --- NEW JSONP BLOG FETCHER (FIXED) ---
+        // --- NEW JSONP BLOG FETCHER (FIXED FOR IMAGES) ---
         function loadBlogPosts(data) {
             const container = document.getElementById('blog-container');
             const spinner = document.getElementById('loading-spinner');
@@ -120,11 +120,23 @@
                     }
                 }
 
-                let img = 'https://via.placeholder.com/600x400?text=RV+Academy+Blog';
-                if (p.media$thumbnail) {
-                    img = p.media$thumbnail.url.replace('/s72-c/', '/w600-h400-p-k-no-nu/');
+                let img = 'https://via.placeholder.com/600x400?text=RV+Academy+Blog'; // Default placeholder image
+                
+                // Try to extract image from content or thumbnail
+                if (p.content && p.content.$t) {
+                    const contentDiv = document.createElement('div');
+                    contentDiv.innerHTML = p.content.$t;
+                    const imgTag = contentDiv.querySelector('img');
+                    if (imgTag && imgTag.src) {
+                        img = imgTag.src;
+                        // Replace small Blogger image sizes with larger ones if possible
+                        img = img.replace(/\/s\d+\//, '/s600/'); // Adjust size as needed
+                    }
+                } else if (p.media$thumbnail && p.media$thumbnail.url) {
+                    img = p.media$thumbnail.url;
+                    img = img.replace(/\/s\d+-c\//, '/w600-h400-p-k-no-nu/'); // A more robust thumbnail size
                 }
-
+                
                 let s = p.summary ? p.summary.$t : "";
                 // Strip HTML tags from summary if any
                 s = s.replace(/<\/?[^>]+(>|$)/g, "");
@@ -134,7 +146,7 @@
                     <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="${i * 100}">
                         <div class="blog-card">
                             <a href="${l}" target="_blank" class="blog-img-wrapper">
-                                <img src="${img}" alt="${t}">
+                                <img src="${img}" alt="${t}" onerror="this.onerror=null;this.src='https://via.placeholder.com/600x400?text=RV+Academy+Blog';">
                             </a>
                             <div class="blog-body">
                                 <a href="${l}" target="_blank" class="text-decoration-none">
