@@ -201,6 +201,9 @@
             const forexList = document.getElementById('forexList');
             const cryptoList = document.getElementById('cryptoList');
             
+            forexList.innerHTML = '';
+            cryptoList.innerHTML = '';
+
             forexLessons.forEach((lesson, index) => {
                 let li = document.createElement('li');
                 li.innerHTML = `<i class="fas fa-play-circle me-2 opacity-75"></i><span><span class="lang-si">${lesson.title_si}</span><span class="lang-en">${lesson.title_en}</span></span>`;
