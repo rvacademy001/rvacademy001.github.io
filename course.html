@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forex Course Sinhala Free | Learn Trading Sri Lanka – RV Academy</title>
-    <meta name="description" content="Best Free Forex & Crypto trading course in Sinhala. Learn Forex trading Sri Lanka from basics to advanced. Start your trading journey with RV Academy.">
-    <meta name="keywords" content="Forex course Sinhala, Forex trading Sri Lanka, Learn crypto Sinhala, Trading academy Sinhala, Forex tutorials Sinhala, Crypto guide Sri Lanka">
+    <title>Forex & Crypto Course Sinhala Free | RV Academy</title>
+    <meta name="description" content="Best Free Forex & Crypto trading course in Sinhala. Learn Binance, Spot Trading, Futures, and Forex from basics to advanced.">
+    <meta name="keywords" content="Forex course Sinhala, Crypto course Sinhala, Binance guide Sinhala, Spot trading Sinhala, Futures trading Sinhala, RV Academy">
     
-    <meta property="og:title" content="Free Forex Course Sinhala - RV Academy">
-    <meta property="og:description" content="Start learning Forex trading from scratch for free.">
+    <meta property="og:title" content="Free Forex & Crypto Course - RV ACADEMY">
+    <meta property="og:description" content="Start learning Forex & Crypto trading from scratch for free.">
     <meta property="og:image" content="https://rvacademy001.github.io/favicon.png">
     <meta property="og:url" content="https://rvacademy001.github.io/course.html">
     <link rel="canonical" href="https://rvacademy001.github.io/course.html" />
@@ -40,8 +40,9 @@
         .sidebar-sticky { position: sticky; top: 100px; z-index: 1; }
         .curriculum-box { background: var(--bg-dark-lighter); padding: 20px; border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.2); max-height: 80vh; overflow-y: auto; }
         .curriculum-list { padding-left: 0; list-style: none; }
-        .curriculum-list li { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; cursor: pointer; transition: 0.2s; border-radius: 5px; }
+        .curriculum-list li { padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; cursor: pointer; transition: 0.2s; border-radius: 5px; display: flex; align-items: center; }
         .curriculum-list li:hover { background: rgba(212, 175, 55, 0.15); color: var(--secondary-color); }
+        .curriculum-list li.active-lesson { background: var(--secondary-color); color: var(--primary-color); font-weight: bold; }
         .video-card { background: var(--bg-dark-lighter); border-radius: 15px; overflow: hidden; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
         .video-card:hover { border-color: var(--secondary-color); box-shadow: 0 10px 30px -15px rgba(0,0,0,0.5); transform: translateY(-5px); }
         .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; background: #000; }
@@ -93,11 +94,11 @@
     <section class="course-header" data-aos="fade-down">
         <div class="container">
             <h1 class="fw-bold display-5" style="color: var(--secondary-color);">
-                <span class="lang-si">FREE FOREX TRADING COURSE</span>
-                <span class="lang-en">FREE FOREX TRADING COURSE</span>
+                <span class="lang-si">FREE TRADING COURSE</span>
+                <span class="lang-en">FREE TRADING COURSE</span>
             </h1>
             <p class="lead opacity-75">
-                <span class="lang-si">Forex trading Sri Lanka පාඨමාලාව මුල සිට සරලව, පියවරෙන් පියවර ඉගෙන ගන්න.</span>
+                <span class="lang-si">**Forex** සහ **Crypto** වෙළඳාම මුල සිට සරලව, පියවරෙන් පියවර ඉගෙන ගන්න.</span>
                 <span class="lang-en">Learn Forex and Crypto trading from scratch, step by step.</span>
             </p>
             <a href="https://t.me/+YBA9j8mPNaZmZTM1" class="btn btn-outline-light btn-sm mt-2" target="_blank"><i class="fab fa-telegram-plane me-2"></i> <span class="lang-si">Join Main Telegram Channel</span><span class="lang-en">Join Main Telegram Channel</span></a>
@@ -110,11 +111,14 @@
                 <div class="sidebar-sticky">
                     <div class="curriculum-box">
                         <h5 class="mb-4 pb-2 border-bottom border-secondary" style="color: var(--secondary-color);"><i class="fas fa-list-ul me-2"></i> <span class="lang-si">පාඩම් මාලාව</span><span class="lang-en">Course Content</span></h5>
-                        <h6 class="text-white opacity-50 mt-3 mb-3 ps-2"><i class="fas fa-chart-pie me-2"></i> FOREX TRADING</h6>
+                        
+                        <h6 class="text-white opacity-75 mt-3 mb-3 ps-2 fw-bold" style="color: #4db8ff !important;"><i class="fas fa-chart-pie me-2"></i> FOREX TRADING</h6>
                         <ul class="curriculum-list" id="forexList"></ul>
-                        <h6 class="text-white opacity-50 mt-5 mb-3 ps-2"><i class="fab fa-bitcoin me-2"></i> CRYPTO TRADING</h6>
-                        <p class="ps-3 fs-sm opacity-50 ms-4"><small><span class="lang-si">ළඟදීම...</span><span class="lang-en">Coming Soon...</span></small></p>
+                        
+                        <h6 class="text-white opacity-75 mt-5 mb-3 ps-2 fw-bold" style="color: #f0b90b !important;"><i class="fab fa-bitcoin me-2"></i> CRYPTO TRADING</h6>
+                        <ul class="curriculum-list" id="cryptoList"></ul>
                     </div>
+                    
                     <div class="mt-4 p-4 text-center shadow-lg" style="background: linear-gradient(135deg, #D4AF37, #FADD7D); border-radius: 15px; color: var(--primary-color);" data-aos="zoom-in" data-aos-delay="400">
                          <h4 class="fw-bold mb-2"><i class="fas fa-rocket me-2"></i> Start Trading!</h4>
                          <p class="small mb-3 opacity-75"><span class="lang-si">විශ්වාසදායකම බ්‍රෝකර් සමග ගිණුමක් අරඹා අපගේ VIP සිග්නල් ලබාගන්න.</span><span class="lang-en">Open an account with a trusted broker and get our VIP signals.</span></p>
@@ -122,8 +126,11 @@
                     </div>
                 </div>
             </div>
+            
             <div class="col-lg-8 order-lg-1">
-                <div id="videoContainer"><div class="text-center py-5"><div class="spinner-border text-warning" role="status"></div><p class="mt-3">Loading Lessons...</p></div></div>
+                <div id="videoContainer">
+                    <div class="text-center py-5"><div class="spinner-border text-warning" role="status"></div><p class="mt-3">Loading Lessons...</p></div>
+                </div>
                 <div class="pagination-container" id="paginationControls" data-aos="fade-up"></div>
             </div>
         </div>
@@ -148,6 +155,8 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true });
+        
+        // FOREX LESSONS DATA
         const forexLessons = [
             { id: "ynWlZnXCDCA", title_si: "Forex Trading කියන්නේ මොකද්ද? | Sinhala Full Guide", desc_si: "Forex වෙළඳපොළ පිළිබඳ සම්පූර්ණ හැඳින්වීමක්.", title_en: "What is Forex Trading? | Sinhala Full Guide", desc_en: "A complete introduction to the Forex market." },
             { id: "0dlwkbXgecg", title_si: "Money Evolution: Trading Before Digital Era", desc_si: "මුදල් පරිණාමය සහ ඩිජිටල් යුගයට පෙර වෙළඳාම.", title_en: "Money Evolution: Trading Before Digital Era", desc_en: "History of money and trading before the digital age." },
@@ -172,31 +181,112 @@
             { id: "K8AIoidv4Ic", title_si: "Fundamental vs Technical Analysis Sinhala", desc_si: "මූලික සහ තාක්ෂණික විශ්ලේෂණය අතර වෙනස.", title_en: "Fundamental vs Technical Analysis", desc_en: "Difference between fundamental and technical analysis." },
             { id: "KPpx5NzS_S4", title_si: "Economic Calendar කියවන්න හැටි | News Reading", desc_si: "ආර්ථික දින දර්ශනය කියවා News Trade කරන හැටි.", title_en: "How to Read Economic Calendar", desc_en: "Reading economic calendar for news trading." }
         ];
-        const videosPerPage = 5; let currentPage = 1;
-        const listContainer = document.getElementById('forexList');
-        forexLessons.forEach((lesson, index) => {
-            let li = document.createElement('li');
-            li.innerHTML = `<div style="display: flex; align-items: flex-start;"><i class="fas fa-play-circle mt-1 me-3 opacity-50" style="min-width: 15px;"></i><span class="lang-si">${lesson.title_si}</span><span class="lang-en">${lesson.title_en}</span></div>`;
-            li.onclick = () => { const targetPage = Math.floor(index / videosPerPage) + 1; if (currentPage !== targetPage) { currentPage = targetPage; loadVideos(currentPage); } document.getElementById('videoContainer').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
-            listContainer.appendChild(li);
-        });
+
+        // CRYPTO LESSONS DATA (NEWLY ADDED)
+        const cryptoLessons = [
+            { id: "AdK-SIrUDck", title_si: "Binance Account Open කරමු | Step by Step Guide", desc_si: "නිවැරදිව Binance ගිණුමක් සාදා Verify කරගන්නා ආකාරය.", title_en: "How to Create Binance Account Sri Lanka", desc_en: "Complete guide to opening a Binance account." },
+            { id: "LG8SVFh5oeg", title_si: "Binance Mobile App Guide 2025 🇱🇰", desc_si: "Binance Phone App එක භාවිතා කරන සම්පූර්ණ විදිය.", title_en: "Binance Mobile App Guide 2025", desc_en: "How to use Binance App for trading." },
+            { id: "C2Lvzq-Nl4E", title_si: "Binance Simple Earn | Passive Income Guide", desc_si: "Crypto තැන්පත් කර කිසිදු අවදානමකින් තොරව පොලියක් ලබාගන්න.", title_en: "Binance Simple Earn for Beginners", desc_en: "Earn passive income with Binance Simple Earn." },
+            { id: "KhOe3RB3LtE", title_si: "Spot Trading Sinhala Tutorial | Safe Trading", desc_si: "Binance Spot Trading කරන නිවැරදි ආකාරය මුල සිට.", title_en: "How to Do Spot Trading on Binance", desc_en: "Complete tutorial on Binance Spot Trading." },
+            { id: "fE8J3ZU6jIk", title_si: "Futures Trading Sinhala | Full Guide", desc_si: "Binance Futures Trading හරහා ලාභ උපයන ආකාරය.", title_en: "Binance Futures Full Guide for Beginners", desc_en: "Master Binance Futures trading strategies." }
+        ];
+
+        let currentPage = 1;
+        const videosPerPage = 5; 
+        
+        // Load Sidebar Lists
+        function loadSidebarLists() {
+            const forexList = document.getElementById('forexList');
+            const cryptoList = document.getElementById('cryptoList');
+            
+            // Populate Forex List
+            forexLessons.forEach((lesson, index) => {
+                let li = document.createElement('li');
+                li.innerHTML = `<i class="fas fa-play-circle me-2 opacity-75"></i><span><span class="lang-si">${lesson.title_si}</span><span class="lang-en">${lesson.title_en}</span></span>`;
+                li.onclick = () => { playSpecificVideo(lesson, 'forex', index + 1); };
+                forexList.appendChild(li);
+            });
+
+            // Populate Crypto List
+            cryptoLessons.forEach((lesson, index) => {
+                let li = document.createElement('li');
+                li.innerHTML = `<i class="fab fa-bitcoin me-2 opacity-75 text-warning"></i><span><span class="lang-si">${lesson.title_si}</span><span class="lang-en">${lesson.title_en}</span></span>`;
+                li.onclick = () => { playSpecificVideo(lesson, 'crypto', index + 1); };
+                cryptoList.appendChild(li);
+            });
+        }
+
+        // Play Specific Video (When Sidebar clicked)
+        function playSpecificVideo(lesson, type, index) {
+            const container = document.getElementById('videoContainer');
+            container.innerHTML = `
+                <div class="video-card" data-aos="fade-up">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/${lesson.id}?autoplay=1" title="${lesson.title_si}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-body">
+                        <h3 class="video-title"><span class="lang-si">${lesson.title_si}</span><span class="lang-en">${lesson.title_en}</span></h3>
+                        <p class="opacity-75 mb-3"><span class="lang-si">${lesson.desc_si}</span><span class="lang-en">${lesson.desc_en}</span></p>
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 border-top border-secondary pt-3" style="border-color: rgba(255,255,255,0.1) !important;">
+                            <a href="https://t.me/RVTRADING0" target="_blank" class="telegram-btn"><i class="fab fa-telegram-plane me-2"></i> Discuss on Telegram</a>
+                            <span class="badge bg-secondary">${type.toUpperCase()} LESSON ${index}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button class="btn btn-outline-light btn-sm" onclick="location.reload()"><i class="fas fa-arrow-left me-2"></i> Back to Main Course List</button>
+                </div>
+            `;
+            window.scrollTo({ top: 80, behavior: 'smooth' });
+            
+            // Re-apply language visibility after injecting new HTML
+            const currentLang = localStorage.getItem('preferredLang') || 'si';
+            setLanguage(currentLang);
+        }
+
+        // Default Video Loader (Pagination Mode for Forex)
         function loadVideos(page) {
             const container = document.getElementById('videoContainer'); container.innerHTML = "";
-            const start = (page - 1) * videosPerPage; const end = start + videosPerPage; const paginatedVideos = forexLessons.slice(start, end);
+            const start = (page - 1) * videosPerPage; const end = start + videosPerPage; 
+            const paginatedVideos = forexLessons.slice(start, end);
+            
             paginatedVideos.forEach((lesson, index) => {
                 const videoHTML = `<div class="video-card" data-aos="fade-up" data-aos-delay="${index * 100}"><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/${lesson.id}" title="${lesson.title_si}" frameborder="0" allowfullscreen></i></div><div class="video-body"><h4 class="video-title"><span class="lang-si">${lesson.title_si}</span><span class="lang-en">${lesson.title_en}</span></h4><p class="opacity-75 mb-3"><span class="lang-si">${lesson.desc_si}</span><span class="lang-en">${lesson.desc_en}</span></p><div class="d-flex justify-content-between align-items-center flex-wrap gap-2 border-top border-secondary pt-3" style="border-color: rgba(255,255,255,0.1) !important;"><a href="https://t.me/RVTRADING0" target="_blank" class="telegram-btn"><i class="fab fa-telegram-plane me-2"></i> Discuss on Telegram</a><small class="text-muted opacity-75"><i class="fas fa-video me-1"></i> Watch Lesson</small></div></div></div>`;
                 container.innerHTML += videoHTML;
             });
             updatePagination(page);
             AOS.refresh();
+            
+            // Apply Language to new elements
+            const currentLang = localStorage.getItem('preferredLang') || 'si';
+            setLanguage(currentLang);
         }
+
         function updatePagination(activePage) {
             const totalPages = Math.ceil(forexLessons.length / videosPerPage); const paginationContainer = document.getElementById('paginationControls'); paginationContainer.innerHTML = "";
             if (totalPages > 1) { for (let i = 1; i <= totalPages; i++) { const btn = document.createElement('button'); btn.innerText = i; btn.className = `page-btn ${i === activePage ? 'active' : ''}`; btn.onclick = () => { currentPage = i; loadVideos(currentPage); window.scrollTo({ top: 0, behavior: 'smooth' }); }; paginationContainer.appendChild(btn); } }
         }
+
+        // Initialization
+        loadSidebarLists();
         loadVideos(currentPage);
-        function setLanguage(lang) { localStorage.setItem('preferredLang', lang); document.documentElement.lang = lang; if (lang === 'en') { document.body.classList.add('english-mode'); document.getElementById('btn-si').classList.remove('active'); document.getElementById('btn-en').classList.add('active'); } else { document.body.classList.remove('english-mode'); document.getElementById('btn-en').classList.remove('active'); document.getElementById('btn-si').classList.add('active'); } loadVideos(currentPage); }
+
+        function setLanguage(lang) { 
+            localStorage.setItem('preferredLang', lang); 
+            document.documentElement.lang = lang; 
+            if (lang === 'en') { 
+                document.body.classList.add('english-mode'); 
+                document.getElementById('btn-si').classList.remove('active'); 
+                document.getElementById('btn-en').classList.add('active'); 
+            } else { 
+                document.body.classList.remove('english-mode'); 
+                document.getElementById('btn-en').classList.remove('active'); 
+                document.getElementById('btn-si').classList.add('active'); 
+            } 
+        }
+        
         if (localStorage.getItem('preferredLang') === 'en') { setLanguage('en'); } else { setLanguage('si'); }
+        
         let mybutton = document.getElementById("backToTopBtn"); window.onscroll = function() { if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) { mybutton.style.display = "block"; } else { mybutton.style.display = "none"; } }; function topFunction() { document.body.scrollTop = 0; document.documentElement.scrollTop = 0; }
         if (!localStorage.getItem('rv_telegram_popup_seen')) { setTimeout(() => { new bootstrap.Modal(document.getElementById('telegramPopup')).show(); }, 10000); }
         function closePopupForever() { localStorage.setItem('rv_telegram_popup_seen', 'true'); bootstrap.Modal.getInstance(document.getElementById('telegramPopup')).hide(); }
