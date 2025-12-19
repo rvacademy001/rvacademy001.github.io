@@ -53,6 +53,8 @@
         .page-btn.active, .page-btn:hover { background: var(--secondary-color); color: var(--primary-color); font-weight: bold; }
         .telegram-btn { background-color: #0088cc; color: white; font-weight: 600; border: none; padding: 8px 15px; border-radius: 50px; text-decoration: none; display: inline-block; transition: 0.3s; }
         .telegram-btn:hover { background-color: #0077b5; color: white; transform: translateY(-2px); }
+        .youtube-btn { background-color: #FF0000; color: white; font-weight: 600; border: none; padding: 8px 15px; border-radius: 50px; text-decoration: none; display: inline-block; transition: 0.3s; font-size: 0.8rem; }
+        .youtube-btn:hover { background-color: #cc0000; color: white; transform: translateY(-2px); }
         ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: var(--primary-color); } ::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 10px; }
         .lang-en { display: none; } body.english-mode .lang-si { display: none !important; } body.english-mode .lang-en { display: inline-block !important; }
         .lang-switch { cursor: pointer; opacity: 0.5; transition: 0.3s; } .lang-switch.active { opacity: 1; font-weight: bold; color: var(--secondary-color) !important; }
@@ -182,7 +184,7 @@
             { id: "KPpx5NzS_S4", title_si: "Economic Calendar කියවන්න හැටි | News Reading", desc_si: "ආර්ථික දින දර්ශනය කියවා News Trade කරන හැටි.", title_en: "How to Read Economic Calendar", desc_en: "Reading economic calendar for news trading." }
         ];
 
-        // CRYPTO LESSONS DATA (NEWLY ADDED)
+        // CRYPTO LESSONS DATA
         const cryptoLessons = [
             { id: "AdK-SIrUDck", title_si: "Binance Account Open කරමු | Step by Step Guide", desc_si: "නිවැරදිව Binance ගිණුමක් සාදා Verify කරගන්නා ආකාරය.", title_en: "How to Create Binance Account Sri Lanka", desc_en: "Complete guide to opening a Binance account." },
             { id: "LG8SVFh5oeg", title_si: "Binance Mobile App Guide 2025 🇱🇰", desc_si: "Binance Phone App එක භාවිතා කරන සම්පූර්ණ විදිය.", title_en: "Binance Mobile App Guide 2025", desc_en: "How to use Binance App for trading." },
@@ -199,7 +201,6 @@
             const forexList = document.getElementById('forexList');
             const cryptoList = document.getElementById('cryptoList');
             
-            // Populate Forex List
             forexLessons.forEach((lesson, index) => {
                 let li = document.createElement('li');
                 li.innerHTML = `<i class="fas fa-play-circle me-2 opacity-75"></i><span><span class="lang-si">${lesson.title_si}</span><span class="lang-en">${lesson.title_en}</span></span>`;
@@ -207,7 +208,6 @@
                 forexList.appendChild(li);
             });
 
-            // Populate Crypto List
             cryptoLessons.forEach((lesson, index) => {
                 let li = document.createElement('li');
                 li.innerHTML = `<i class="fab fa-bitcoin me-2 opacity-75 text-warning"></i><span><span class="lang-si">${lesson.title_si}</span><span class="lang-en">${lesson.title_en}</span></span>`;
@@ -216,9 +216,11 @@
             });
         }
 
-        // Play Specific Video (When Sidebar clicked)
+        // Play Specific Video with Link Button
         function playSpecificVideo(lesson, type, index) {
             const container = document.getElementById('videoContainer');
+            const videoLink = `https://www.youtube.com/watch?v=${lesson.id}`;
+            
             container.innerHTML = `
                 <div class="video-card" data-aos="fade-up">
                     <div class="video-wrapper">
@@ -228,7 +230,10 @@
                         <h3 class="video-title"><span class="lang-si">${lesson.title_si}</span><span class="lang-en">${lesson.title_en}</span></h3>
                         <p class="opacity-75 mb-3"><span class="lang-si">${lesson.desc_si}</span><span class="lang-en">${lesson.desc_en}</span></p>
                         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 border-top border-secondary pt-3" style="border-color: rgba(255,255,255,0.1) !important;">
-                            <a href="https://t.me/RVTRADING0" target="_blank" class="telegram-btn"><i class="fab fa-telegram-plane me-2"></i> Discuss on Telegram</a>
+                            <div>
+                                <a href="https://t.me/RVTRADING0" target="_blank" class="telegram-btn me-2"><i class="fab fa-telegram-plane me-2"></i> Discuss on Telegram</a>
+                                <a href="${videoLink}" target="_blank" class="youtube-btn"><i class="fab fa-youtube me-2"></i> Watch on YouTube</a>
+                            </div>
                             <span class="badge bg-secondary">${type.toUpperCase()} LESSON ${index}</span>
                         </div>
                     </div>
@@ -239,25 +244,36 @@
             `;
             window.scrollTo({ top: 80, behavior: 'smooth' });
             
-            // Re-apply language visibility after injecting new HTML
             const currentLang = localStorage.getItem('preferredLang') || 'si';
             setLanguage(currentLang);
         }
 
-        // Default Video Loader (Pagination Mode for Forex)
         function loadVideos(page) {
             const container = document.getElementById('videoContainer'); container.innerHTML = "";
             const start = (page - 1) * videosPerPage; const end = start + videosPerPage; 
             const paginatedVideos = forexLessons.slice(start, end);
             
             paginatedVideos.forEach((lesson, index) => {
-                const videoHTML = `<div class="video-card" data-aos="fade-up" data-aos-delay="${index * 100}"><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/${lesson.id}" title="${lesson.title_si}" frameborder="0" allowfullscreen></i></div><div class="video-body"><h4 class="video-title"><span class="lang-si">${lesson.title_si}</span><span class="lang-en">${lesson.title_en}</span></h4><p class="opacity-75 mb-3"><span class="lang-si">${lesson.desc_si}</span><span class="lang-en">${lesson.desc_en}</span></p><div class="d-flex justify-content-between align-items-center flex-wrap gap-2 border-top border-secondary pt-3" style="border-color: rgba(255,255,255,0.1) !important;"><a href="https://t.me/RVTRADING0" target="_blank" class="telegram-btn"><i class="fab fa-telegram-plane me-2"></i> Discuss on Telegram</a><small class="text-muted opacity-75"><i class="fas fa-video me-1"></i> Watch Lesson</small></div></div></div>`;
+                const videoLink = `https://www.youtube.com/watch?v=${lesson.id}`;
+                const videoHTML = `
+                    <div class="video-card" data-aos="fade-up" data-aos-delay="${index * 100}">
+                        <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/${lesson.id}" title="${lesson.title_si}" frameborder="0" allowfullscreen></i></div>
+                        <div class="video-body">
+                            <h4 class="video-title"><span class="lang-si">${lesson.title_si}</span><span class="lang-en">${lesson.title_en}</span></h4>
+                            <p class="opacity-75 mb-3"><span class="lang-si">${lesson.desc_si}</span><span class="lang-en">${lesson.desc_en}</span></p>
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 border-top border-secondary pt-3" style="border-color: rgba(255,255,255,0.1) !important;">
+                                <div>
+                                    <a href="https://t.me/RVTRADING0" target="_blank" class="telegram-btn me-2"><i class="fab fa-telegram-plane me-2"></i> Telegram</a>
+                                    <a href="${videoLink}" target="_blank" class="youtube-btn"><i class="fab fa-youtube me-1"></i> YouTube</a>
+                                </div>
+                                <small class="text-muted opacity-75"><i class="fas fa-video me-1"></i> Watch Lesson</small>
+                            </div>
+                        </div>
+                    </div>`;
                 container.innerHTML += videoHTML;
             });
             updatePagination(page);
             AOS.refresh();
-            
-            // Apply Language to new elements
             const currentLang = localStorage.getItem('preferredLang') || 'si';
             setLanguage(currentLang);
         }
@@ -267,7 +283,6 @@
             if (totalPages > 1) { for (let i = 1; i <= totalPages; i++) { const btn = document.createElement('button'); btn.innerText = i; btn.className = `page-btn ${i === activePage ? 'active' : ''}`; btn.onclick = () => { currentPage = i; loadVideos(currentPage); window.scrollTo({ top: 0, behavior: 'smooth' }); }; paginationContainer.appendChild(btn); } }
         }
 
-        // Initialization
         loadSidebarLists();
         loadVideos(currentPage);
 
