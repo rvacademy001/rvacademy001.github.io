@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Blog - RV Academy | Forex & Crypto Sinhala</title>
+    <meta name="description" content="Read the latest trading articles from RV Academy. We sync all posts from our official blog to help you learn Forex and Crypto in Sinhala.">
     
-    <title>Forex Trading Blog Sinhala | Market News & Strategies - RV Academy</title>
-    <meta name="description" content="Read the latest Forex & Crypto trading articles in Sinhala. Get daily market updates, trading strategies, and educational posts from RV Academy.">
-    <meta name="keywords" content="Forex blog Sinhala, Crypto news Sri Lanka, Trading articles Sinhala, Market analysis Sinhala, Best forex strategies">
-    
-    <meta property="og:title" content="RV Academy Trading Blog - Sinhala">
-    <meta property="og:description" content="Learn trading strategies and market news in Sinhala.">
+    <meta property="og:title" content="RV Academy Trading Blog">
+    <meta property="og:description" content="Read all our latest trading articles and strategies here.">
     <meta property="og:image" content="https://rvacademy001.github.io/favicon.png">
     <meta property="og:url" content="https://rvacademy001.github.io/blog.html">
     <link rel="canonical" href="https://rvacademy001.github.io/blog.html" />
@@ -27,6 +25,8 @@
         :root { --primary-color: #0a192f; --secondary-color: #D4AF37; --text-light: #ccd6f6; --bg-dark-lighter: #112240; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--primary-color); color: var(--text-light); padding-top: 80px; overflow-x: hidden; }
         a { text-decoration: none; }
+        .progress-container { width: 100%; height: 4px; background: #0a192f; position: fixed; top: 0; left: 0; z-index: 9999; }
+        .progress-bar { height: 4px; background: var(--secondary-color); width: 0%; transition: width 0.1s; }
         .navbar { background-color: rgba(10, 25, 47, 0.95) !important; backdrop-filter: blur(10px); padding: 15px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
         .navbar-brand { font-weight: 700; font-size: 1.8rem; color: var(--secondary-color) !important; letter-spacing: 1px; }
         .nav-link { color: var(--text-light) !important; font-weight: 500; margin-left: 15px; transition: 0.3s; }
@@ -37,19 +37,31 @@
         .btn-gold { background-color: var(--secondary-color); color: var(--primary-color); font-weight: 700; border-radius: 30px; padding: 8px 25px; transition: 0.3s; border: 2px solid var(--secondary-color); }
         .btn-gold:hover { background-color: transparent; color: var(--secondary-color); }
         .blog-header { background: linear-gradient(135deg, #112240 0%, #0a192f 100%); padding: 60px 0; text-align: center; border-bottom: 3px solid var(--secondary-color); }
-        .blog-card { background: var(--bg-dark-lighter); border: 1px solid rgba(212, 175, 55, 0.1); border-radius: 15px; overflow: hidden; transition: 0.3s; height: 100%; }
-        .blog-card:hover { transform: translateY(-5px); border-color: var(--secondary-color); }
-        .blog-img { height: 200px; object-fit: cover; width: 100%; }
-        .blog-body { padding: 20px; }
-        .blog-date { font-size: 0.8rem; opacity: 0.6; margin-bottom: 10px; display: block; }
-        .blog-title { font-size: 1.2rem; font-weight: 600; color: #fff; margin-bottom: 10px; }
-        .blog-desc { font-size: 0.9rem; opacity: 0.8; margin-bottom: 20px; }
-        .read-more { color: var(--secondary-color); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+        
+        /* Blog Card Styles */
+        .blog-card { background: var(--bg-dark-lighter); border: 1px solid rgba(212, 175, 55, 0.1); border-radius: 15px; overflow: hidden; transition: 0.3s; height: 100%; display: flex; flex-direction: column; }
+        .blog-card:hover { transform: translateY(-5px); border-color: var(--secondary-color); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .blog-img { height: 200px; object-fit: cover; width: 100%; transition: 0.5s; }
+        .blog-card:hover .blog-img { transform: scale(1.05); }
+        .blog-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .blog-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.5; }
+        .blog-title:hover { color: var(--secondary-color); }
+        .blog-meta { font-size: 0.8rem; color: var(--secondary-color); margin-bottom: 15px; display: block; opacity: 0.8; }
+        .blog-excerpt { font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; flex-grow: 1; }
+        .read-more-btn { color: var(--primary-color); background: var(--secondary-color); padding: 8px 20px; border-radius: 50px; font-weight: 600; text-align: center; display: inline-block; width: fit-content; margin-top: auto; }
+        .read-more-btn:hover { background: #fff; color: var(--primary-color); transform: translateY(-2px); }
+
+        /* Loading Spinner */
+        .loader { border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid var(--secondary-color); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 50px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
         .lang-en { display: none; } body.english-mode .lang-si { display: none !important; } body.english-mode .lang-en { display: inline-block !important; }
         .lang-switch { cursor: pointer; opacity: 0.5; transition: 0.3s; } .lang-switch.active { opacity: 1; font-weight: bold; color: var(--secondary-color) !important; }
     </style>
 </head>
 <body>
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html"><i class="fas fa-chart-line me-2"></i> RV ACADEMY</a>
@@ -64,13 +76,12 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><span class="lang-si">තවත්</span><span class="lang-en">More</span></a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="analysis.html"><i class="fas fa-chart-pie me-2"></i> <span class="lang-si">විශ්ලේෂණ</span><span class="lang-en">Analysis</span></a></li>
-                            <li><a class="dropdown-item active" href="blog.html"><i class="fas fa-newspaper me-2"></i> <span class="lang-si">බ්ලොග්</span><span class="lang-en">Blog</span></a></li>
-                            <li><hr class="dropdown-divider" style="background: rgba(255,255,255,0.1);"></li>
-                            <li><a class="dropdown-item" href="about.html"><i class="fas fa-info-circle me-2"></i> <span class="lang-si">අපි ගැන</span><span class="lang-en">About Us</span></a></li>
-                            <li><a class="dropdown-item" href="faq.html"><i class="fas fa-question-circle me-2"></i> <span class="lang-si">ගැටළු (FAQ)</span><span class="lang-en">FAQ</span></a></li>
-                            <li><a class="dropdown-item" href="contact.html"><i class="fas fa-envelope me-2"></i> <span class="lang-si">සම්බන්ධ වීමට</span><span class="lang-en">Contact Us</span></a></li>
-                            <li><a class="dropdown-item" href="legal.html"><i class="fas fa-shield-alt me-2"></i> <span class="lang-si">නීතිමය</span><span class="lang-en">Legal</span></a></li>
+                            <li><a class="dropdown-item" href="analysis.html"><i class="fas fa-chart-pie me-2"></i> Analysis</a></li>
+                            <li><a class="dropdown-item active" href="blog.html"><i class="fas fa-newspaper me-2"></i> Blog</a></li>
+                            <li><a class="dropdown-item" href="about.html"><i class="fas fa-info-circle me-2"></i> About Us</a></li>
+                            <li><a class="dropdown-item" href="faq.html"><i class="fas fa-question-circle me-2"></i> FAQ</a></li>
+                            <li><a class="dropdown-item" href="contact.html"><i class="fas fa-envelope me-2"></i> Contact Us</a></li>
+                            <li><a class="dropdown-item" href="legal.html"><i class="fas fa-shield-alt me-2"></i> Legal</a></li>
                         </ul>
                     </li>
                     <li class="nav-item ms-lg-3"><a href="vip.html" class="btn btn-gold btn-sm"><span class="lang-si">JOIN VIP</span><span class="lang-en">JOIN VIP</span></a></li>
@@ -83,74 +94,114 @@
 
     <section class="blog-header" data-aos="fade-down">
         <div class="container">
-            <h1 class="display-4 fw-bold">TRADING <span style="color: var(--secondary-color);">BLOG</span></h1>
-            <p class="lead opacity-75"><span class="lang-si">Forex සහ Crypto ගැන අලුත්ම තොරතුරු දැනගන්න.</span><span class="lang-en">Stay updated with the latest Forex & Crypto insights.</span></p>
+            <h1 class="display-4 fw-bold">OUR <span style="color: var(--secondary-color);">BLOG</span></h1>
+            <p class="lead opacity-75"><span class="lang-si">RV Academy නිල බ්ලොග් අඩවියේ අලුත්ම ලිපි මෙතැනින් කියවන්න.</span><span class="lang-en">Read all articles from our official Blogspot here.</span></p>
         </div>
     </section>
 
     <section class="container py-5">
-        <div class="row g-4">
-            <div class="col-md-4" data-aos="fade-up">
-                <div class="blog-card">
-                    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1470&auto=format&fit=crop" class="blog-img" alt="Forex trading for beginners Sinhala">
-                    <div class="blog-body">
-                        <span class="blog-date"><i class="far fa-calendar-alt me-1"></i> Dec 18, 2025</span>
-                        <h5 class="blog-title"><span class="lang-si">Forex Trading පටන් ගන්නේ කොහොමද?</span><span class="lang-en">How to Start Forex Trading?</span></h5>
-                        <p class="blog-desc"><span class="lang-si">මුල සිට සරලව Forex ගිණුමක් සාදා, නිවැරදිව Trade කරන ආකාරය ගැන සම්පූර්ණ මාර්ගෝපදේශය.</span><span class="lang-en">A complete guide on creating a Forex account and trading correctly from scratch.</span></p>
-                        <a href="course.html" class="read-more">Read More <i class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
+        <div class="row g-4" id="blog-posts-container">
+            <div class="col-12 text-center">
+                <div class="loader"></div>
+                <p class="text-white opacity-50">Loading articles from Blogspot...</p>
             </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="blog-card">
-                    <img src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?q=80&w=1374&auto=format&fit=crop" class="blog-img" alt="Crypto trading strategies Sinhala">
-                    <div class="blog-body">
-                        <span class="blog-date"><i class="far fa-calendar-alt me-1"></i> Dec 15, 2025</span>
-                        <h5 class="blog-title"><span class="lang-si">Bitcoin සහ Crypto අනාගතය</span><span class="lang-en">The Future of Bitcoin & Crypto</span></h5>
-                        <p class="blog-desc"><span class="lang-si">Cryptocurrency වෙළඳපොලේ ඉදිරි දැක්ම සහ 2026 වසරේ ආයෝජනයට සුදුසු කාසි මොනවාද?</span><span class="lang-en">Market outlook for Cryptocurrency and best coins to invest in 2026.</span></p>
-                        <a href="course.html" class="read-more">Read More <i class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="blog-card">
-                    <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=1471&auto=format&fit=crop" class="blog-img" alt="Risk management in trading">
-                    <div class="blog-body">
-                        <span class="blog-date"><i class="far fa-calendar-alt me-1"></i> Dec 10, 2025</span>
-                        <h5 class="blog-title"><span class="lang-si">Risk Management රහස්</span><span class="lang-en">Risk Management Secrets</span></h5>
-                        <p class="blog-desc"><span class="lang-si">සාර්ථක Trader කෙනෙක් වෙන්න නම් අනිවාර්යයෙන්ම දැනගත යුතු මුදල් පාලනය කිරීමේ ක්‍රම.</span><span class="lang-en">Money management strategies you must know to become a successful trader.</span></p>
-                        <a href="tools.html" class="read-more">Use Calculators <i class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="https://rvacademytrading.blogspot.com/" target="_blank" class="btn btn-outline-light btn-lg px-5">Visit Main Blog Site</a>
         </div>
     </section>
     
     <footer style="background-color: #050910; color: #ccd6f6; padding-top: 3rem;">
         <div class="container p-4">
             <div class="row">
-                <div class="col-lg-4 col-md-12 mb-4"><h5 class="text-uppercase mb-4" style="color: var(--secondary-color); font-weight: 700;">RV ACADEMY</h5><p class="small opacity-75">Sri Lanka's #1 Free Forex & Crypto educational website. We provide free signals, tools, and courses.</p><div class="mt-3"><a href="https://www.youtube.com/@rvacademy21" target="_blank" class="btn btn-outline-light btn-sm rounded-circle me-2" aria-label="YouTube"><i class="fab fa-youtube"></i></a><a href="https://web.facebook.com/profile.php?id=61581736944274" target="_blank" class="btn btn-outline-light btn-sm rounded-circle me-2" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="https://t.me/+YBA9j8mPNaZmZTM1" target="_blank" class="btn btn-outline-light btn-sm rounded-circle me-2" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a></div></div>
+                <div class="col-lg-4 col-md-12 mb-4"><h5 class="text-uppercase mb-4" style="color: var(--secondary-color); font-weight: 700;">RV ACADEMY</h5><p class="small opacity-75">Sri Lanka's #1 Free Forex & Crypto educational website.</p><div class="mt-3"><a href="https://www.youtube.com/@rvacademy21" target="_blank" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fab fa-youtube"></i></a><a href="https://web.facebook.com/profile.php?id=61581736944274" target="_blank" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fab fa-facebook-f"></i></a><a href="https://t.me/+YBA9j8mPNaZmZTM1" target="_blank" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fab fa-telegram-plane"></i></a></div></div>
                 <div class="col-lg-4 col-md-6 mb-4"><h6 class="text-uppercase mb-4 font-weight-bold" style="color: var(--secondary-color);">Quick Links</h6><ul class="list-unstyled"><li class="mb-2"><a href="course.html" class="text-white text-decoration-none opacity-75">Free Course</a></li><li class="mb-2"><a href="vip.html" class="text-white text-decoration-none opacity-75">VIP Signals</a></li><li class="mb-2"><a href="tools.html" class="text-white text-decoration-none opacity-75">Trading Tools</a></li><li class="mb-2"><a href="ea.html" class="text-white text-decoration-none opacity-75">Free EA Robot</a></li><li class="mb-2"><a href="legal.html" class="text-white text-decoration-none opacity-75">Privacy Policy</a></li></ul></div>
-                <div class="col-lg-4 col-md-6 mb-4"><h6 class="text-uppercase mb-4 font-weight-bold" style="color: var(--secondary-color);">Contact</h6><p class="small opacity-75"><i class="fas fa-envelope me-2"></i> rvacademyxm@gmail.com</p><p class="small opacity-75"><i class="fab fa-whatsapp me-2"></i> +94 76 545 0055</p><p class="small opacity-75"><i class="fas fa-map-marker-alt me-2"></i> Colombo, Sri Lanka</p></div>
+                <div class="col-lg-4 col-md-6 mb-4"><h6 class="text-uppercase mb-4 font-weight-bold" style="color: var(--secondary-color);">Contact</h6><p class="small opacity-75"><i class="fas fa-envelope me-2"></i> rvacademyxm@gmail.com</p><p class="small opacity-75"><i class="fab fa-whatsapp me-2"></i> +94 76 545 0055</p></div>
             </div>
         </div>
-        <div class="container-fluid p-3" style="background-color: #020408; border-top: 1px solid rgba(255,255,255,0.05);"><div class="container"><p class="text-muted mb-2" style="font-size: 0.75rem; text-align: justify; opacity: 0.6;"><strong style="color: #dc3545;">RISK WARNING:</strong> Trading Forex involves a high level of risk. Educational purposes only.</p><div class="text-center mt-3"><small class="opacity-50">© 2025 RV ACADEMY. All Rights Reserved.</small></div></div></div>
+        <div class="container-fluid p-3" style="background-color: #020408; border-top: 1px solid rgba(255,255,255,0.05);"><div class="container"><p class="text-muted mb-2" style="font-size: 0.75rem; text-align: justify; opacity: 0.6;"><strong style="color: #dc3545;">RISK WARNING:</strong> Trading Forex involves high risk. Educational purposes only.</p><div class="text-center mt-3"><small class="opacity-50">© 2025 RV ACADEMY. All Rights Reserved.</small></div></div></div>
     </footer>
 
     <button onclick="topFunction()" id="backToTopBtn" title="Go to top" style="display: none; position: fixed; bottom: 25px; right: 25px; z-index: 99; border: none; outline: none; background-color: var(--secondary-color); color: var(--primary-color); cursor: pointer; padding: 12px 15px; border-radius: 50%; font-size: 18px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3);"><i class="fas fa-arrow-up"></i></button>
 
-    <div class="modal fade" id="telegramPopup" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content" style="background: linear-gradient(135deg, #0a192f 0%, #112240 100%); border: 2px solid var(--secondary-color); border-radius: 15px;"><div class="modal-header border-0"><h5 class="modal-title gold-text fw-bold">DON'T MISS OUT!</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-center text-white py-4"><i class="fas fa-bell fa-3x mb-3 gold-text"></i><h4><span class="lang-si">නොමිලේ සිග්නල් ලබාගන්න!</span><span class="lang-en">Get Free Daily Signals!</span></h4><p class="opacity-75 mb-4"><span class="lang-si">අපගේ ටෙලිග්‍රෑම් චැනලය සමග සම්බන්ධ වී දිනපතා නොමිලේ වෙළඳ සිග්නල් ලබාගන්න.</span><span class="lang-en">Join our official Telegram channel to get free daily trading signals.</span></p><a href="https://t.me/+YBA9j8mPNaZmZTM1" target="_blank" class="btn btn-gold btn-lg w-100" onclick="closePopupForever()">JOIN TELEGRAM NOW</a></div></div></div></div>
+    <div class="modal fade" id="telegramPopup" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content" style="background: linear-gradient(135deg, #0a192f 0%, #112240 100%); border: 2px solid var(--secondary-color); border-radius: 15px;"><div class="modal-header border-0"><h5 class="modal-title gold-text fw-bold">DON'T MISS OUT!</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-center text-white py-4"><i class="fas fa-bell fa-3x mb-3 gold-text"></i><h4><span class="lang-si">නොමිලේ සිග්නල් ලබාගන්න!</span><span class="lang-en">Get Free Daily Signals!</span></h4><p class="opacity-75 mb-4"><span class="lang-si">අපගේ ටෙලිග්‍රෑම් චැනලය සමග සම්බන්ධ වී දිනපතා නොමිලේ වෙළඳ සිග්නල් ලබාගන්න.</span><span class="lang-en">Join our official Telegram channel to get free daily trading signals and market updates directly to your phone.</span></p><a href="https://t.me/+YBA9j8mPNaZmZTM1" target="_blank" class="btn btn-gold btn-lg w-100" onclick="closePopupForever()">JOIN TELEGRAM NOW</a></div></div></div></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true });
+        
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+            
+            let mybutton = document.getElementById("backToTopBtn");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) { mybutton.style.display = "block"; } else { mybutton.style.display = "none"; }
+        };
+
+        // 🟢 AUTO BLOG FETCHING SCRIPT (BLOGGER API)
+        function displayBlogPosts(json) {
+            const container = document.getElementById('blog-posts-container');
+            container.innerHTML = ''; // Clear loader
+            
+            const posts = json.feed.entry;
+            if (!posts) {
+                container.innerHTML = '<div class="text-center text-white">No posts found.</div>';
+                return;
+            }
+
+            posts.forEach(post => {
+                const title = post.title.$t;
+                // Get the link
+                let link = '#';
+                post.link.forEach(l => { if (l.rel === 'alternate') link = l.href; });
+                
+                // Get Image (Resize s72-c to w600)
+                let imgUrl = 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1470&auto=format&fit=crop'; // Default
+                if (post.media$thumbnail) {
+                    imgUrl = post.media$thumbnail.url.replace('/s72-c/', '/w600/');
+                }
+
+                // Get Date
+                const date = new Date(post.published.$t).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+                // Get Snippet
+                let snippet = "Click to read full article...";
+                if (post.content) {
+                    const tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = post.content.$t;
+                    snippet = tempDiv.textContent.substring(0, 100) + "...";
+                }
+
+                const postHTML = `
+                    <div class="col-md-4" data-aos="fade-up">
+                        <div class="blog-card">
+                            <img src="${imgUrl}" class="blog-img" alt="${title}">
+                            <div class="blog-body">
+                                <span class="blog-meta"><i class="far fa-calendar-alt me-2"></i> ${date}</span>
+                                <h5 class="blog-title"><a href="${link}" target="_blank" class="text-white text-decoration-none">${title}</a></h5>
+                                <p class="blog-excerpt small text-muted">${snippet}</p>
+                                <a href="${link}" target="_blank" class="read-more-btn">Read Post</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += postHTML;
+            });
+        }
+
         function setLanguage(lang) { localStorage.setItem('preferredLang', lang); document.documentElement.lang = lang; if (lang === 'en') { document.body.classList.add('english-mode'); document.getElementById('btn-si').classList.remove('active'); document.getElementById('btn-en').classList.add('active'); } else { document.body.classList.remove('english-mode'); document.getElementById('btn-en').classList.remove('active'); document.getElementById('btn-si').classList.add('active'); } }
         if (localStorage.getItem('preferredLang') === 'en') { setLanguage('en'); } else { setLanguage('si'); }
-        let mybutton = document.getElementById("backToTopBtn"); window.onscroll = function() { if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) { mybutton.style.display = "block"; } else { mybutton.style.display = "none"; } }; function topFunction() { document.body.scrollTop = 0; document.documentElement.scrollTop = 0; }
+        function topFunction() { document.body.scrollTop = 0; document.documentElement.scrollTop = 0; }
         if (!localStorage.getItem('rv_telegram_popup_seen')) { setTimeout(() => { new bootstrap.Modal(document.getElementById('telegramPopup')).show(); }, 10000); }
         function closePopupForever() { localStorage.setItem('rv_telegram_popup_seen', 'true'); bootstrap.Modal.getInstance(document.getElementById('telegramPopup')).hide(); }
     </script>
+    
+    <script src="https://rvacademytrading.blogspot.com/feeds/posts/default?alt=json-in-script&callback=displayBlogPosts"></script>
+    
     <script type="text/javascript">var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date();(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/690ed383a2e13a195dc65862/1j9gukfg1';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();</script>
 </body>
 </html>
