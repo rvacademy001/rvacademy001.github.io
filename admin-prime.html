@@ -148,18 +148,36 @@
       <p class="state-msg" id="formMsg"></p>
     </div>
 
-    <!-- MOVIE DATABASE TABLE -->
-    <div class="panel">
-      <h2 style="font-size:26px; margin-bottom:16px;">Published Database items</h2>
-      <div style="overflow-x:auto;">
-        <table class="admin-table">
-          <thead>
-            <tr><th>Poster</th><th>Title</th><th>Type</th><th>Category</th><th>Trending</th><th>Actions</th></tr>
-          </thead>
-          <tbody id="movieTableBody">
-            <tr><td colspan="5">Loading movie catalog...</td></tr>
-          </tbody>
-        </table>
+    <!-- DATABASE TABLES -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start;">
+      <!-- MOVIE DATABASE TABLE -->
+      <div class="panel" style="margin:0;">
+        <h2 style="font-size:24px; margin-bottom:16px;">🎬 Published Movies</h2>
+        <div style="overflow-x:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr><th>Poster</th><th>Title</th><th>Category</th><th>Trending</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="movieTableBody">
+              <tr><td colspan="5">Loading movie catalog...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TV SERIES DATABASE TABLE -->
+      <div class="panel" style="margin:0;">
+        <h2 style="font-size:24px; margin-bottom:16px;">📺 Published TV Series</h2>
+        <div style="overflow-x:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr><th>Poster</th><th>Title</th><th>Category</th><th>Trending</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="seriesTableBody">
+              <tr><td colspan="5">Loading TV Series catalog...</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 

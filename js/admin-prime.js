@@ -181,25 +181,26 @@
 
   // ---------- Table Loader, Edit, & Delete ----------
   async function loadMovies(){
-    const tbody = document.getElementById('movieTableBody');
+    const tbodyMovies = document.getElementById('movieTableBody');
+    const tbodySeries = document.getElementById('seriesTableBody');
+    if (!tbodyMovies || !tbodySeries) return;
+
     const {data, error} = await supabase.from('movies').select('*').order('created_at', {ascending:false});
     if(error){
-      tbody.innerHTML = `<tr><td colspan="6">${error.message}</td></tr>`;
+      tbodyMovies.innerHTML = `<tr><td colspan="5">${error.message}</td></tr>`;
+      tbodySeries.innerHTML = `<tr><td colspan="5">${error.message}</td></tr>`;
       return;
     }
-    if(!data || !data.length){
-      tbody.innerHTML = `<tr><td colspan="6">No items found in catalog.</td></tr>`;
-      return;
-    }
+
+    const moviesList = data ? data.filter(m => m.type !== 'series') : [];
+    const seriesList = data ? data.filter(m => m.type === 'series') : [];
     
-    tbody.innerHTML = data.map(m => {
+    const renderRow = m => {
       const poster = m.poster_url || driveLinkToImageUrl(m.drive_link) || '';
-      const mediaType = m.type === 'series' ? 'TV Series' : 'Movie';
       return `
         <tr>
           <td><img src="${poster}" style="opacity:0;transition:opacity .3s" onload="this.style.opacity=1" onerror="this.style.opacity=0.15"></td>
           <td style="font-weight:600;">${m.title}</td>
-          <td><span class="badge" style="background:var(--surface-2); border:1px solid var(--line); padding:4px 8px; border-radius:12px; font-size:11px; color:#fff;">${mediaType}</span></td>
           <td>${m.category || ''}</td>
           <td>${m.trending ? '<span style="color:var(--primary)">Yes</span>' : 'No'}</td>
           <td>
@@ -207,11 +208,19 @@
             <button class="btn danger" style="margin:0;padding:6px 12px;font-size:12px" data-del="${m.id}">Delete</button>
           </td>
         </tr>`;
-    }).join('');
+    };
+
+    tbodyMovies.innerHTML = moviesList.length
+      ? moviesList.map(renderRow).join('')
+      : `<tr><td colspan="5">No movies found in catalog.</td></tr>`;
+
+    tbodySeries.innerHTML = seriesList.length
+      ? seriesList.map(renderRow).join('')
+      : `<tr><td colspan="5">No TV Series found in catalog.</td></tr>`;
   }
 
   // Handle Edit/Delete button triggers
-  document.getElementById('movieTableBody').addEventListener('click', async (e)=>{
+  const handleTableClick = async (e) => {
     const btn = e.target.closest('button');
     if(!btn) return;
     const editId = btn.getAttribute('data-edit');
@@ -219,7 +228,10 @@
     console.log("Admin list action clicked. Edit ID:", editId, "Delete ID:", delId);
     if(editId) editMovie(editId);
     if(delId) await deleteMovie(delId);
-  });
+  };
+
+  document.getElementById('movieTableBody').addEventListener('click', handleTableClick);
+  document.getElementById('seriesTableBody').addEventListener('click', handleTableClick);
 
   async function editMovie(id){
     const {data:m, error} = await supabase.from('movies').select('*').eq('id', id).single();
