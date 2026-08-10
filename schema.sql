@@ -1,0 +1,1 @@
+-- Redundant root file. The active schema is in sql/schema.sql

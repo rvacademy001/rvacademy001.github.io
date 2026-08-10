@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Prime — Movie Details</title>
+<link rel="stylesheet" href="css/style.css?v=1.1">
+<!-- Adsterra Popunder -->
+<script src="https://pl30456703.effectivecpmnetwork.com/f2/62/8a/f2628a4a9eef317d18dc7d16c447c3b6.js"></script>
+<!-- Adsterra Social Bar -->
+<script src="https://pl30456704.effectivecpmnetwork.com/04/b5/ea/04b5ea7198bd1e984e2cf7006b5a3fff.js"></script>
+<style>
+  .detail-grid-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 32px;
+    max-width: 1100px;
+    margin: 30px auto;
+  }
+  .detail-main-col {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .detail-info-block {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 28px;
+  }
+  .detail-sidebar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left: 1px solid var(--line);
+    padding-left: 24px;
+  }
+  .ad-title-tag {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .ad-sidebar-placement {
+    background: rgba(255,255,255,0.01);
+    border: 1px dashed var(--line);
+    width: 162px;
+    min-height: 920px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    padding: 10px 0;
+  }
+  .specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--line);
+    padding: 16px;
+    border-radius: var(--radius);
+    margin-top: 16px;
+  }
+  .spec-item {
+    font-size: 13px;
+    color: var(--text);
+  }
+  .spec-item strong {
+    color: var(--muted);
+    margin-right: 6px;
+  }
+  .detail .poster{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;background:var(--surface-2);animation:fadeInUp .5s ease both;position:relative;}
+  .detail .poster a{display:block;width:100%;height:100%;text-decoration:none;position:relative;}
+  /* Play/Download indicator on hover */
+  .detail .poster a::after{
+    content:'⚡ Play / Download';
+    position:absolute; inset:0;
+    background:rgba(0,0,0,0.65);
+    color:var(--primary);
+    display:flex; justify-content:center; align-items:center;
+    font-weight:700; font-size:15px;
+    opacity:0; transition:opacity 0.3s ease;
+    z-index:2;
+    text-shadow: 0 0 8px rgba(255,204,0,0.4);
+  }
+  .detail .poster a:hover::after{opacity:1;}
+  .detail .poster img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease;z-index:1;}
+  .detail .poster img.loaded{opacity:1;}
+  .detail h1{font-size:44px;margin:0 0 8px;animation:fadeInUp .55s ease .08s both;}
+  .detail .meta{color:var(--muted);font-size:14px;margin-bottom:16px;display:flex;gap:14px;flex-wrap:wrap;animation:fadeInUp .55s ease .14s both;}
+  .detail .cat-tag{background:var(--surface-2);border:1px solid var(--line);padding:4px 10px;border-radius:20px;font-size:12px;}
+  .detail p.desc{
+    line-height:1.8;
+    color:rgba(255,255,255,0.9);
+    animation:fadeInUp .55s ease .2s both;
+    background:rgba(255,255,255,0.03);
+    border-left: 3px solid var(--primary);
+    padding: 12px 18px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin-bottom: 24px;
+    font-size: 15px;
+  }
+  .detail .btn{animation:fadeInUp .55s ease .26s both;}
+  @media(max-width:900px){
+    .detail-grid-wrapper { grid-template-columns: 1fr; }
+    .detail-sidebar-col { border-left: none; padding-left: 0; margin-top: 20px; }
+  }
+  @media(max-width:600px){
+    .detail-info-block { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">Movie<span>Prime</span></a>
+    <nav class="main-nav">
+      <a href="index.html?v=1.1" data-en="Home" data-si="මුල් පිටුව">Home</a>
+      <a href="category.html?v=1.1" data-en="Movies" data-si="චිත්‍රපට">Movies</a>
+      <a href="series.html?v=1.1" data-en="TV Series" data-si="ටීවී සීරීස්">TV Series</a>
+      <a href="member.html?v=1.1" data-en="Member" data-si="සාමාජික">Member</a>
+      <a href="about.html?v=1.1" data-en="About Us" data-si="අප ගැන">About Us</a>
+      <a href="contact.html?v=1.1" data-en="Contact" data-si="සම්බන්ධ වන්න">Contact</a>
+    </nav>
+    <div class="lang-toggle">
+      <button data-lang="en" class="active">EN</button>
+      <button data-lang="si">සිං</button>
+    </div>
+  </div>
+</header>
+<div class="sprocket-rule"></div>
+
+<div id="trailerWrap"></div>
+
+<div class="detail-grid-wrapper" style="padding:0 20px;">
+  <!-- Main Details Content -->
+  <div class="detail-main-col" id="detailMainCol">
+    <div id="detail">
+      <p style="color:var(--muted); padding:40px 0;">Loading movie details...</p>
+    </div>
+  </div>
+  
+  <!-- Right Sidebar Ads -->
+  <div class="detail-sidebar-col">
+    <h3 class="ad-title-tag">ADVERTISEMENT</h3>
+    <div class="ad-sidebar-placement">
+      <!-- Banner 1: 160x600 -->
+      <div style="width:160px; height:600px; overflow:hidden;">
+        <script type="text/javascript">
+          atOptions = {
+            'key' : 'ae58e49682ec18c8a3d4dbd30773d7a1',
+            'format' : 'iframe',
+            'height' : 600,
+            'width' : 160,
+            'params' : {}
+          };
+        </script>
+        <script type="text/javascript" src="https://www.highperformanceformat.com/ae58e49682ec18c8a3d4dbd30773d7a1/invoke.js"></script>
+      </div>
+
+      <!-- Banner 2: 160x300 -->
+      <div style="width:160px; height:300px; overflow:hidden;">
+        <script type="text/javascript">
+          atOptions = {
+            'key' : '61701a676fb861ae36ecedaf2219ea0e',
+            'format' : 'iframe',
+            'height' : 300,
+            'width' : 160,
+            'params' : {}
+          };
+        </script>
+        <script type="text/javascript" src="https://www.highperformanceformat.com/61701a676fb861ae36ecedaf2219ea0e/invoke.js"></script>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Related Movies Section -->
+<div class="related-section-wrap" style="max-width:1100px; margin:40px auto 0; padding:0 20px;">
+  <h2 id="relatedTitle" style="font-size:24px; color:#fff; margin-bottom:20px;" data-en="More Movies Like This" data-si="මෙයට සමාන වෙනත් චිත්‍රපට">More Movies Like This</h2>
+  <div class="grid" id="relatedMoviesGrid">
+    <p style="color:var(--muted)">Loading related movies...</p>
+  </div>
+</div>
+
+<!-- Adsterra Banner 300x250 -->
+<div class="ad-container-square">
+  <script type="text/javascript">
+    atOptions = {
+      'key' : '38370b985d6a76b57ce470135e5e26fa',
+      'format' : 'iframe',
+      'height' : 250,
+      'width' : 300,
+      'params' : {}
+    };
+  </script>
+  <script type="text/javascript" src="https://www.highperformanceformat.com/38370b985d6a76b57ce470135e5e26fa/invoke.js"></script>
+</div>
+
+<!-- Modal Popup for Telegram Quality Selection -->
+<div class="modal-overlay" id="downloadModal">
+  <div class="modal-box">
+    <h3 id="modalTitle" data-en="Select Quality" data-si="වීඩියෝ තත්ත්වය තෝරන්න">Select Quality</h3>
+    <p data-en="Choose your preferred quality options. The link will open directly in Telegram."
+       data-si="ඔබ කැමති වීඩියෝ මට්ටම තෝරන්න. ලින්ක් එක Telegram හරහා විවෘත වේ.">
+       Choose your preferred quality options. The link will open directly in Telegram.
+    </p>
+    <div class="quality-list" id="qualityList">
+      <!-- Injected Dynamically -->
+    </div>
+    <div style="margin-top:16px; margin-bottom:12px; font-size:11px; color:var(--muted); line-height:1.4; display:flex; align-items:center; gap:6px; justify-content:center; border:1px dashed var(--line); padding:8px; border-radius:6px; background:rgba(255,255,255,0.01);" data-en="💡 Tip: If an advertisement page opens, press your browser back button to get the link." data-si="💡 උපදෙස: වෙනත් වෙළඳ දැන්වීම් පිටුවක් විවෘත වුවහොත්, නැවත මෙම පිටුවට (Back) පැමිණෙන්න.">
+      💡 Tip: If an advertisement page opens, press your browser back button to get the link.
+    </div>
+    <span class="modal-close-btn" id="closeModal" data-en="Cancel" data-si="අවලංගු කරන්න">Cancel</span>
+  </div>
+</div>
+<!-- Adsterra Leaderboard (728x90 Desktop, 320x50 Mobile) -->
+<div class="ad-container-leaderboard">
+  <div class="ad-desktop">
+    <script type="text/javascript">
+      atOptions = {
+        'key' : '0c3e09929c6bd5c161e92d47694573dc',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+    </script>
+    <script type="text/javascript" src="https://www.highperformanceformat.com/0c3e09929c6bd5c161e92d47694573dc/invoke.js"></script>
+  </div>
+  <div class="ad-mobile">
+    <script type="text/javascript">
+      atOptions = {
+        'key' : '294315831e7ced4fb18ce910e4e89a44',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    </script>
+    <script type="text/javascript" src="https://www.highperformanceformat.com/294315831e7ced4fb18ce910e4e89a44/invoke.js"></script>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner" style="display:flex; flex-direction:column; gap:16px; align-items:center; text-align:center;">
+    <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center; font-size:14px;">
+      <a href="https://t.me/movieprimeytsl" target="_blank" rel="noopener" style="color:var(--primary); text-decoration:none; font-weight:700;">#️⃣ Telegram Channel</a>
+      <a href="https://whatsapp.com/channel/0029VbDDB8K8PgsPkQHHoK34" target="_blank" rel="noopener" style="color:#25d366; text-decoration:none; font-weight:700;">🟢 WhatsApp Channel</a>
+      <a href="https://web.facebook.com/profile.php?id=61590992003172" target="_blank" rel="noopener" style="color:#1877f2; text-decoration:none; font-weight:700;">💙 Facebook Page</a>
+      <a href="privacy.html?v=1.1" style="color:var(--crimson); text-decoration:none; font-weight:700;">⚖️ Privacy & Disclaimer</a>
+    </div>
+    <div style="font-size:12px; color:var(--muted); margin-top:8px;">
+      <span>© 2026 Movie Prime. </span>
+      <span data-en="Built for movie lovers." data-si="චිත්‍රපට ලෝලීන් සඳහා.">Built for movie lovers.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js?v=1.1"></script>
+<script>
+{
+const supabase = window.supabaseClient;
+let currentMovie = null;
+let watchlistRecord = null;
+let currentUserId = null;
+
+function escapeHtml(s) {
+  if (s === null || s === undefined) return '';
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// ---------- language toggle (English / Sinhala) ----------
+function applyLang(lang){
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    el.textContent = lang === 'si' ? (el.dataset.si || el.dataset.en) : el.dataset.en;
+  });
+  document.querySelectorAll('.lang-toggle button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+  localStorage.setItem('mp_lang', lang);
+  updateWatchlistBtnUI();
+}
+
+function initLangToggle(){
+  const saved = localStorage.getItem('mp_lang') || 'en';
+  applyLang(saved);
+  document.querySelectorAll('.lang-toggle button').forEach(b=>{
+    b.addEventListener('click', ()=> applyLang(b.dataset.lang));
+  });
+}
+
+function getYoutubeEmbedUrl(url) {
+  if (!url) return '';
+  if (url.includes('youtube.com/embed/')) return url;
+  
+  let videoId = '';
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  
+  if (match && match[2].length === 11) {
+    videoId = match[2];
+  }
+  
+  return videoId ? `https://www.youtube.com/embed/${videoId}` : '';
+}
+
+// ---------- Watchlist Button Logic ----------
+async function checkWatchlistState() {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) return;
+  
+  currentUserId = session.user.id;
+  const { data, error } = await supabase
+    .from('watchlist')
+    .select('*')
+    .eq('user_id', currentUserId)
+    .eq('movie_id', currentMovie.id)
+    .maybeSingle();
+
+  if (!error && data) {
+    watchlistRecord = data;
+  } else {
+    watchlistRecord = null;
+  }
+  updateWatchlistBtnUI();
+}
+
+function updateWatchlistBtnUI() {
+  const btn = document.getElementById('watchlistBtn');
+  if (!btn) return;
+  
+  const lang = localStorage.getItem('mp_lang') || 'en';
+  
+  if (watchlistRecord) {
+    btn.classList.add('active');
+    btn.innerHTML = `
+      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <span>${lang === 'si' ? 'වොච්ලිස්ට් එකෙන් මකන්න' : 'Saved to Watchlist'}</span>
+    `;
+  } else {
+    btn.classList.remove('active');
+    btn.innerHTML = `
+      <svg viewBox="0 0 24 24"><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>
+      <span>${lang === 'si' ? 'වොච්ලිස්ට් එකට එක් කරන්න' : 'Save to Watchlist'}</span>
+    `;
+  }
+}
+
+async function toggleWatchlist() {
+  if (!currentUserId) {
+    const lang = localStorage.getItem('mp_lang') || 'en';
+    alert(lang === 'si' ? 'කරුණාකර පළමුව සාමාජිකයෙකු ලෙස ඇතුළු වන්න.' : 'Please log in as a member first.');
+    window.location.href = 'member.html';
+    return;
+  }
+  
+  if (watchlistRecord) {
+    // Delete
+    const { error } = await supabase
+      .from('watchlist')
+      .delete()
+      .eq('id', watchlistRecord.id);
+      
+    if (!error) {
+      watchlistRecord = null;
+      updateWatchlistBtnUI();
+    }
+  } else {
+    // Insert
+    const { data, error } = await supabase
+      .from('watchlist')
+      .insert({
+        user_id: currentUserId,
+        movie_id: currentMovie.id
+      })
+      .select()
+      .single();
+      
+    if (!error && data) {
+      watchlistRecord = data;
+      updateWatchlistBtnUI();
+    }
+  }
+}
+
+// ---------- Modal Popup Trigger ----------
+function openDownloadModal() {
+  const modal = document.getElementById('downloadModal');
+  const qList = document.getElementById('qualityList');
+  const lang = localStorage.getItem('mp_lang') || 'en';
+  
+  if (!modal || !qList) return;
+  
+  let html = '';
+  
+  const getDlRedirect = (link, label) => {
+    return `download.html?link=${encodeURIComponent(link)}&title=${encodeURIComponent(currentMovie.title + ' - ' + label)}`;
+  };
+
+  if (currentMovie.type === 'series' && currentMovie.episodes) {
+    const lines = currentMovie.episodes.split('\n');
+    lines.forEach(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        const epTitle = parts[0].trim();
+        const epLink = parts.slice(1).join('|').trim();
+        if (epTitle && epLink) {
+          html += `
+            <a class="quality-btn" href="${getDlRedirect(epLink, epTitle)}" target="_blank" rel="noopener" style="margin-bottom: 8px;">
+              <span>${escapeHtml(epTitle)}</span>
+              <span class="badge-quality">Download</span>
+            </a>`;
+        }
+      }
+    });
+  } else {
+    if (currentMovie.link_480p) {
+      html += `
+        <a class="quality-btn" href="${getDlRedirect(currentMovie.link_480p, '480p')}" target="_blank" rel="noopener">
+          <span>480p Standard</span>
+          <span class="badge-quality">Telegram</span>
+        </a>`;
+    }
+    if (currentMovie.link_720p) {
+      html += `
+        <a class="quality-btn" href="${getDlRedirect(currentMovie.link_720p, '720p')}" target="_blank" rel="noopener">
+          <span>720p High Definition</span>
+          <span class="badge-quality">Telegram</span>
+        </a>`;
+    }
+    if (currentMovie.link_1080p) {
+      html += `
+        <a class="quality-btn" href="${getDlRedirect(currentMovie.link_1080p, '1080p')}" target="_blank" rel="noopener">
+          <span>1080p Full HD</span>
+          <span class="badge-quality">Telegram</span>
+        </a>`;
+    }
+    
+    // Fallback to general download link if quality links are empty
+    if (!html && currentMovie.download_link) {
+      html += `
+        <a class="quality-btn" href="${getDlRedirect(currentMovie.download_link, 'Download')}" target="_blank" rel="noopener">
+          <span>${lang === 'si' ? 'සෘජු පිවිසුම' : 'Direct Access'}</span>
+          <span class="badge-quality">Link</span>
+        </a>`;
+    }
+  }
+  
+  if (!html) {
+    html = `<p style="color:var(--muted); font-size: 13px;">${lang === 'si' ? 'කිසිදු බාගත කිරීමේ ලින්ක් එකක් සපයා නැත.' : 'No download links available.'}</p>`;
+  }
+  
+  qList.innerHTML = html;
+  modal.classList.add('open');
+}
+
+function closeDownloadModal() {
+  document.getElementById('downloadModal').classList.remove('open');
+}
+
+// ---------- Related Movies Loader ----------
+async function loadRelatedMovies(category, currentId, type = 'movie') {
+  const grid = document.getElementById('relatedMoviesGrid');
+  if (!grid) return;
+  
+  const primaryCategory = category ? category.split(',')[0].trim() : '';
+  const { data, error } = await supabase
+    .from('movies')
+    .select('*')
+    .ilike('category', `%${primaryCategory}%`)
+    .eq('type', type)
+    .neq('id', currentId)
+    .limit(4);
+    
+  if (error || !data || data.length === 0) {
+    const lang = localStorage.getItem('mp_lang') || 'en';
+    const noRelatedText = lang === 'si' 
+      ? (type === 'series' ? 'සමාන ටීවී සීරීස් කිසිවක් හමු නොවීය.' : 'සමාන චිත්‍රපට කිසිවක් හමු නොවීය.')
+      : (type === 'series' ? 'No related TV series found.' : 'No related movies found.');
+    grid.innerHTML = `<p style="color:var(--muted); font-size:13px;">${noRelatedText}</p>`;
+    return;
+  }
+  
+  grid.innerHTML = data.map(m => {
+    const poster = m.poster_url || driveLinkToImageUrl(m.drive_link) || '';
+    return `
+      <div class="card">
+        <div class="poster-wrap" onclick="window.location.href='movie.html?id=${m.id}'">
+          ${m.trending ? '<span class="badge trending">Trending</span>' : ''}
+          <img src="${poster}" alt="${escapeHtml(m.title)}" loading="lazy" onload="this.classList.add('loaded')" onerror="this.style.opacity=0.15">
+        </div>
+        <div class="card-body">
+          <p class="title" onclick="window.location.href='movie.html?id=${m.id}'">${escapeHtml(m.title)}</p>
+          <div class="meta" onclick="window.location.href='movie.html?id=${m.id}'">
+            <div class="meta-left">
+              <span class="genre-tag">${escapeHtml(m.category)}</span>
+              <span class="year-val">${m.year || ''}</span>
+            </div>
+            ${m.rating ? `<span class="rating">★ ${m.rating}</span>` : ''}
+          </div>
+          <div class="card-socials">
+            <a href="https://t.me/movieprimeytsl" target="_blank" rel="noopener" class="card-soc-btn tg" title="Join Telegram Channel">
+              <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.27-2.03-.49-.82-.27-1.47-.41-1.42-.87.03-.24.36-.49.99-.75 3.86-1.68 6.44-2.78 7.74-3.31 3.69-1.51 4.45-1.77 4.95-1.78.11 0 .36.03.52.16.13.1.17.25.19.35.02.13.02.26 0 .39z"/></svg>
+            </a>
+            <a href="https://whatsapp.com/channel/0029VbDDB8K8PgsPkQHHoK34" target="_blank" rel="noopener" class="card-soc-btn wa" title="Join WhatsApp Channel">
+              <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.817 9.817 0 0 0 12.04 2zm0 1.63c2.21 0 4.29.86 5.86 2.43 1.57 1.57 2.43 3.65 2.43 5.86 0 4.56-3.72 8.28-8.28 8.28-1.47 0-2.91-.39-4.18-1.13l-.3-.18-3.11.82.83-3.03-.2-.31c-.81-1.29-1.24-2.79-1.24-4.33.01-4.56 3.73-8.28 8.29-8.28z"/></svg>
+            </a>
+            <a href="https://web.facebook.com/profile.php?id=61590992003172" target="_blank" rel="noopener" class="card-soc-btn fb" title="Follow FB Page">
+              <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.99 3.65 9.12 8.44 9.88v-6.99H7.9v-2.89h2.54V9.8c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.89h-2.33v6.99C18.35 21.12 22 16.99 22 12c0-5.52-4.48-10-10-10z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  // Translate dynamic language items
+  const lang = localStorage.getItem('mp_lang') || 'en';
+  applyLang(lang);
+}
+
+// ---------- Detail Fetcher ----------
+async function loadMovie(){
+  const id = new URLSearchParams(location.search).get('id');
+  const wrap = document.getElementById('detail');
+  if(!id){ wrap.innerHTML = '<p>Movie not found.</p>'; return; }
+
+  const {data:m, error} = await supabase.from('movies').select('*').eq('id', id).single();
+  if(error || !m){ wrap.innerHTML = '<p>Item not found.</p>'; return; }
+
+  currentMovie = m;
+  const poster = m.poster_url || driveLinkToImageUrl(m.drive_link) || '';
+  document.title = `Movie Prime — ${m.title}`;
+
+  const relTitle = document.getElementById('relatedTitle');
+  if(relTitle){
+    if(m.type === 'series'){
+      relTitle.setAttribute('data-en', 'More TV Series Like This');
+      relTitle.setAttribute('data-si', 'මෙයට සමාන වෙනත් ටීවී සීරීස්');
+    } else {
+      relTitle.setAttribute('data-en', 'More Movies Like This');
+      relTitle.setAttribute('data-si', 'මෙයට සමාන වෙනත් චිත්‍රපට');
+    }
+  }
+
+  // Check if trailer is available
+  const youtubeEmbed = getYoutubeEmbedUrl(m.trailer_link || m.download_link);
+  let trailerHTML = '';
+  if (youtubeEmbed) {
+    trailerHTML = `
+      <div class="trailer-container" style="max-width:1100px; margin:20px auto; width:100%; aspect-ratio:16/9; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line);">
+        <iframe src="${youtubeEmbed}" title="${m.title} Trailer" style="width:100%; height:100%; border:none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    `;
+  }
+
+  // Populate trailer wrapper statically
+  const tWrap = document.getElementById('trailerWrap');
+  if (tWrap) {
+    tWrap.innerHTML = trailerHTML;
+  }
+
+  wrap.innerHTML = `
+    <div class="detail-info-block">
+      <div class="poster">
+        <a href="https://www.effectivecpmnetwork.com/qhwrj18356?key=ad49ffbd96addedb2c0d8bdd05713509" target="_blank" rel="noopener" title="Play or Download ${m.type === 'series' ? 'TV Series' : 'Movie'}">
+          <img src="${poster}" alt="${m.title}" onload="this.classList.add('loaded')" onerror="this.style.opacity=0.15">
+        </a>
+      </div>
+      <div class="details-text">
+        <h1 class="display" style="margin-top:0; font-size:32px; color:#fff;">${m.title}</h1>
+        
+        <div class="meta" style="margin-bottom: 12px; display:flex; gap:14px; align-items:center; font-size:13px; color:var(--muted);">
+          ${m.year ? `<span>📅 ${m.year}</span>` : ''}
+          ${m.rating ? `<span style="color:var(--primary); font-weight:700;">★ ${m.rating} IMDb</span>` : ''}
+          <span class="cat-tag" style="background:var(--surface-2); border:1px solid var(--line); padding:2px 8px; border-radius:12px; font-size:11px; color:#fff;">${m.category || ''}</span>
+        </div>
+
+        <!-- Specifications Table/Grid -->
+        <div class="specs-grid">
+          ${m.category ? `<div class="spec-item"><strong>Genre:</strong> <span>${m.category}</span></div>` : ''}
+          ${m.year ? `<div class="spec-item"><strong>Year:</strong> <span>${m.year}</span></div>` : ''}
+          <div class="spec-item"><strong>Language:</strong> <span>${m.description && (m.description.includes('Sinhala') || m.description.includes('සිංහල')) ? 'Sinhala' : 'English / Subtitles'}</span></div>
+          <div class="spec-item"><strong>Source:</strong> <span>Official WebRip</span></div>
+        </div>
+
+        <p class="desc" style="margin-top: 16px;">${m.description ? m.description.replace(/\n/g,'<br>') : 'No description added yet.'}</p>
+        
+        <div style="margin-top:20px; display:flex; flex-direction:column; gap:16px;">
+          <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+            <!-- Image Download Button -->
+            <a class="download-btn-img" id="downloadBtn" aria-label="Download ${m.type === 'series' ? 'TV Series' : 'Movie'}">
+              <img src="download_btn.png" alt="Download Now" style="width:220px; height:auto; display:block; border-radius:30px;">
+            </a>
+
+            <!-- Watchlist Toggle Button -->
+            <button class="watchlist-btn" id="watchlistBtn">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span>Save to Watchlist</span>
+            </button>
+          </div>
+          <!-- Adsterra Smartlink Promo -->
+          <div style="display:flex; align-items:center; gap:16px;">
+            <a href="https://www.effectivecpmnetwork.com/qhwrj18356?key=ad49ffbd96addedb2c0d8bdd05713509" target="_blank" rel="noopener" class="btn secondary" style="width:100%; max-width:240px; margin-top:0; padding:10px 18px; border-radius:20px; font-weight:600; font-size:13px; text-align:center;" data-en="⚡ High-Speed Premium Link" data-si="⚡ ප්‍රිමියම් ඩවුන්ලෝඩ් සර්වර්">⚡ High-Speed Premium Link</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Bind Listeners
+  document.getElementById('downloadBtn').addEventListener('click', openDownloadModal);
+  document.getElementById('watchlistBtn').addEventListener('click', toggleWatchlist);
+  
+  // Verify watchlist item exists in user log
+  checkWatchlistState();
+  
+  // Load Related Movies in same category
+  loadRelatedMovies(m.category, m.id, m.type);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initLangToggle();
+  loadMovie();
+  
+  // Close Modal triggers
+  document.getElementById('closeModal').addEventListener('click', closeDownloadModal);
+  document.getElementById('downloadModal').addEventListener('click', (e) => {
+    if (e.target.id === 'downloadModal') closeDownloadModal();
+  });
+});
+}
+</script>
+</body>
+</html>

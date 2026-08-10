@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Prime — Hidden Admin Dashboard</title>
+<link rel="stylesheet" href="css/style.css?v=1.1">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">Movie<span>Prime</span></a>
+    <nav class="main-nav">
+      <a href="index.html?v=1.1" data-en="Home" data-si="මුල් පිටුව">Home</a>
+      <a href="category.html?v=1.1" data-en="Movies" data-si="චිත්‍රපට">Movies</a>
+      <a href="series.html?v=1.1" data-en="TV Series" data-si="ටීවී සීරීස්">TV Series</a>
+      <a href="member.html?v=1.1" data-en="Member" data-si="සාමාජික">Member</a>
+      <a href="about.html?v=1.1" data-en="About Us" data-si="අප ගැන">About Us</a>
+      <a href="contact.html?v=1.1" data-en="Contact" data-si="සම්බන්ධ වන්න">Contact</a>
+    </nav>
+    <button class="btn secondary" id="logoutBtn" style="display:none;margin:0;">Log out</button>
+  </div>
+</header>
+<div class="sprocket-rule"></div>
+
+<div class="admin-shell">
+
+  <!-- ADMIN LOGIN PANEL -->
+  <div class="panel" id="loginPanel">
+    <h2 style="font-size:26px; text-align:center;">Admin Portal</h2>
+    <p style="color:var(--muted); text-align:center; font-size:14px; margin-bottom:20px;">Please authenticate to access the movie database manager.</p>
+    
+    <label>Admin Username</label>
+    <input type="text" id="loginEmail" placeholder="MovieprimeAdmin">
+    
+    <label>Password</label>
+    <input type="password" id="loginPassword" placeholder="••••••••">
+    
+    <button class="btn" id="loginBtn" style="width:100%">Log In</button>
+    <p class="state-msg" id="loginMsg" style="text-align:center;"></p>
+  </div>
+
+  <!-- ADMIN CONTENT (hidden until logged in) -->
+  <div id="adminContent" style="display:none;">
+
+    <div class="panel">
+      <h2 style="font-size:26px" id="formTitle">Add Premium Movie</h2>
+      <p style="color:var(--muted); font-size:13px; margin:4px 0 20px;">Fill out the fields below to publish a movie with download options.</p>
+      
+      <input type="hidden" id="movieId">
+
+      <div class="row" style="margin-bottom:16px;">
+        <div style="flex:1;">
+          <label>Media Type (වර්ගය)</label>
+          <select id="fType" style="width:100%;">
+            <option value="movie">Movie (චිත්‍රපට)</option>
+            <option value="series">TV Series (ටීවී සීරීස්)</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Title (මාතෘකාව)</label>
+      <input type="text" id="fTitle" placeholder="e.g. Interstellar">
+
+      <!-- Full-Width Genre Selection -->
+      <div style="margin-bottom:16px;">
+        <label style="display:block; margin-bottom:8px; font-weight:600;">Category / Genre (කාණ්ඩ - එකකට වඩා තෝරාගත හැක)</label>
+        <div id="categoryCheckboxes" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap:10px; background:rgba(255,255,255,0.02); border:1px solid var(--line); padding:12px; border-radius:6px; max-height:160px; overflow-y:auto;">
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Action" style="margin:0; width:16px; height:16px;"> Action</label>
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Adventure" style="margin:0; width:16px; height:16px;"> Adventure</label>
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Animation" style="margin:0; width:16px; height:16px;"> Animation</label>
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Comedy" style="margin:0; width:16px; height:16px;"> Comedy</label>
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Crime" style="margin:0; width:16px; height:16px;"> Crime</label>
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Drama" style="margin:0; width:16px; height:16px;"> Drama</label>
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Family" style="margin:0; width:16px; height:16px;"> Family</label>
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Fantasy" style="margin:0; width:16px; height:16px;"> Fantasy</label>
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Horror" style="margin:0; width:16px; height:16px;"> Horror</label>
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Mystery" style="margin:0; width:16px; height:16px;"> Mystery</label>
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Romance" style="margin:0; width:16px; height:16px;"> Romance</label>
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Science Fiction" style="margin:0; width:16px; height:16px;"> Sci-Fi</label>
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Thriller" style="margin:0; width:16px; height:16px;"> Thriller</label>
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Sinhala" style="margin:0; width:16px; height:16px;"> Sinhala Movies</label>
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Tamil" style="margin:0; width:16px; height:16px;"> Tamil Movies</label>
+          <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px;"><input type="checkbox" value="Hindi" style="margin:0; width:16px; height:16px;"> Hindi Movies</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Release Year</label>
+          <input type="number" id="fYear" placeholder="2024">
+        </div>
+        <div>
+          <label>Rating (0–10)</label>
+          <input type="number" step="0.1" id="fRating" placeholder="8.5">
+        </div>
+      </div>
+
+      <label>Description / Synopsis</label>
+      <textarea id="fDescription" placeholder="Short description of the film..."></textarea>
+
+      <label>Poster Image (Google Drive link or Direct URL)</label>
+      <input type="text" id="fDrive" placeholder="https://drive.google.com/file/d/XXXXXXX/view or direct image link">
+      <img id="fPreview" class="preview-thumb" style="display:none">
+
+      <label>Trailer URL (YouTube Link)</label>
+      <input type="text" id="fTrailer" placeholder="https://www.youtube.com/watch?v=zSWdZVtXT7E">
+
+      <!-- Movie Quality Download Links -->
+      <div id="movieQualityGroup">
+        <h3 style="font-size:20px; color:var(--primary); margin:24px 0 10px; border-bottom:1px solid var(--line); padding-bottom:8px;">Telegram Quality Links</h3>
+        <div class="row">
+          <div>
+            <label>480p Telegram Link</label>
+            <input type="text" id="fLink480" placeholder="https://t.me/yourchannel/12">
+          </div>
+          <div>
+            <label>720p Telegram Link</label>
+            <input type="text" id="fLink720" placeholder="https://t.me/yourchannel/13">
+          </div>
+          <div>
+            <label>1080p Telegram Link</label>
+            <input type="text" id="fLink1080" placeholder="https://t.me/yourchannel/14">
+          </div>
+        </div>
+      </div>
+
+      <!-- TV Series Episode Links -->
+      <div id="episodesFormGroup" style="display:none;">
+        <h3 style="font-size:20px; color:var(--primary); margin:24px 0 10px; border-bottom:1px solid var(--line); padding-bottom:8px;">TV Series Episode Links</h3>
+        <label>Episodes list (Format: Episode Name | Telegram Link - one per line)</label>
+        <textarea id="fEpisodes" style="height:150px; font-family:monospace; margin-bottom:16px;" placeholder="e.g.&#10;Episode 01 | https://t.me/yourchannel/101&#10;Episode 02 | https://t.me/yourchannel/102"></textarea>
+      </div>
+
+      <label>General Download/Watch Link (Fallback)</label>
+      <input type="text" id="fDownload" placeholder="https://...">
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="fTrending">
+        <label style="margin:0">Show in Featured/Trending Row</label>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:20px;">
+        <button class="btn" id="saveBtn">Publish Item</button>
+        <button class="btn secondary" id="cancelEditBtn" style="display:none;">Cancel edit</button>
+      </div>
+      <p class="state-msg" id="formMsg"></p>
+    </div>
+
+    <!-- MOVIE DATABASE TABLE -->
+    <div class="panel">
+      <h2 style="font-size:26px; margin-bottom:16px;">Published Database items</h2>
+      <div style="overflow-x:auto;">
+        <table class="admin-table">
+          <thead>
+            <tr><th>Poster</th><th>Title</th><th>Type</th><th>Category</th><th>Trending</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="movieTableBody">
+            <tr><td colspan="5">Loading movie catalog...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner" style="display:flex; flex-direction:column; gap:16px; align-items:center; text-align:center;">
+    <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center; font-size:14px;">
+      <a href="https://t.me/movieprimeytsl" target="_blank" rel="noopener" style="color:var(--primary); text-decoration:none; font-weight:700;">#️⃣ Telegram Channel</a>
+      <a href="https://whatsapp.com/channel/0029VbDDB8K8PgsPkQHHoK34" target="_blank" rel="noopener" style="color:#25d366; text-decoration:none; font-weight:700;">🟢 WhatsApp Channel</a>
+      <a href="https://web.facebook.com/profile.php?id=61590992003172" target="_blank" rel="noopener" style="color:#1877f2; text-decoration:none; font-weight:700;">💙 Facebook Page</a>
+      <a href="https://wa.me/94704890283" target="_blank" rel="noopener" style="color:#25d366; text-decoration:none; font-weight:700;">📞 WhatsApp: +94 70 489 0283</a>
+      <a href="mailto:Movieprimeytsl@gmail.com" style="color:var(--text); text-decoration:none; font-weight:700;">✉️ Movieprimeytsl@gmail.com</a>
+    </div>
+    <div style="font-size:12px; color:var(--muted); margin-top:8px;">
+      <span>© 2026 Movie Prime. </span>
+      <span data-en="Built for movie lovers." data-si="චිත්‍රපට ලෝලීන් සඳහා.">Built for movie lovers.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js?v=1.1"></script>
+<script src="js/admin-prime.js?v=1.1"></script>
+</body>
+</html>
