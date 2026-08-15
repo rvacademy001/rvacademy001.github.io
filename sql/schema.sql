@@ -1,5 +1,5 @@
 -- ==========================================================
--- Movie Prime — Supabase Schema
+-- Movie Prime — Supabase Schema (Updated with TV Series & Multi-Episodes)
 -- WARNING: This will drop the existing tables to recreate them with the correct columns!
 -- Supabase Dashboard > SQL Editor > New Query > paste all > Run
 -- ==========================================================
@@ -8,12 +8,13 @@
 drop table if exists watchlist cascade;
 drop table if exists movies cascade;
 
--- 1) Movies table
+-- 1) Movies table (Stores both Movies and TV Series)
 create table movies (
   id uuid primary key default gen_random_uuid(),
   title text not null,
   description text,
   category text not null,               -- e.g. Action, Sinhala, Drama, Horror...
+  type text not null default 'movie',   -- 'movie' or 'series'
   year int,
   rating numeric(3,1),                  -- e.g. 8.5
   drive_link text,                      -- raw Google Drive share link (optional)
@@ -23,6 +24,7 @@ create table movies (
   link_480p text,                       -- 480p quality telegram link
   link_720p text,                       -- 720p quality telegram link
   link_1080p text,                      -- 1080p quality telegram link
+  episodes text,                        -- TV Series episode links list (one per line)
   trending boolean not null default false,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()

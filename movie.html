@@ -490,6 +490,7 @@ async function loadRelatedMovies(category, currentId, type = 'movie') {
   
   grid.innerHTML = data.map(m => {
     const poster = m.poster_url || driveLinkToImageUrl(m.drive_link) || '';
+    const mainGenre = m.category ? m.category.split(',')[0].trim() : '';
     return `
       <div class="card">
         <div class="poster-wrap" onclick="window.location.href='movie.html?id=${m.id}'">
@@ -500,7 +501,7 @@ async function loadRelatedMovies(category, currentId, type = 'movie') {
           <p class="title" onclick="window.location.href='movie.html?id=${m.id}'">${escapeHtml(m.title)}</p>
           <div class="meta" onclick="window.location.href='movie.html?id=${m.id}'">
             <div class="meta-left">
-              <span class="genre-tag">${escapeHtml(m.category)}</span>
+              <span class="genre-tag">${escapeHtml(mainGenre)}</span>
               <span class="year-val">${m.year || ''}</span>
             </div>
             ${m.rating ? `<span class="rating">★ ${m.rating}</span>` : ''}
@@ -577,10 +578,12 @@ async function loadMovie(){
       <div class="details-text">
         <h1 class="display" style="margin-top:0; font-size:32px; color:#fff;">${m.title}</h1>
         
-        <div class="meta" style="margin-bottom: 12px; display:flex; gap:14px; align-items:center; font-size:13px; color:var(--muted);">
+        <div class="meta" style="margin-bottom: 12px; display:flex; gap:14px; align-items:center; flex-wrap:wrap; font-size:13px; color:var(--muted);">
           ${m.year ? `<span>📅 ${m.year}</span>` : ''}
           ${m.rating ? `<span style="color:var(--primary); font-weight:700;">★ ${m.rating} IMDb</span>` : ''}
-          <span class="cat-tag" style="background:var(--surface-2); border:1px solid var(--line); padding:2px 8px; border-radius:12px; font-size:11px; color:#fff;">${m.category || ''}</span>
+          ${(m.category || '').split(',').map(cat => cat.trim()).filter(Boolean).map(cat => 
+            `<span class="cat-tag" style="background:var(--surface-2); border:1px solid var(--line); padding:2px 8px; border-radius:12px; font-size:11px; color:#fff;">${escapeHtml(cat)}</span>`
+          ).join(' ')}
         </div>
 
         <!-- Specifications Table/Grid -->

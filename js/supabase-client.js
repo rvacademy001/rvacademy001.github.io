@@ -7,8 +7,8 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 window.isDemoMode = false;
 
-// Check if project has default credentials placeholder
-if (SUPABASE_URL.includes("YOUR-PROJECT-REF") || SUPABASE_ANON_KEY.includes("YOUR-ANON-PUBLIC-KEY")) {
+// Check if project has default credentials placeholder OR Supabase library failed to load
+if (SUPABASE_URL.includes("YOUR-PROJECT-REF") || SUPABASE_ANON_KEY.includes("YOUR-ANON-PUBLIC-KEY") || typeof window.supabase === 'undefined') {
   window.isDemoMode = true;
 
   // Pre-seed sample movies into localStorage if empty

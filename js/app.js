@@ -10,6 +10,7 @@
   let allLatestMovies = [];
   let allCategoryMovies = [];
   let allLatestSeries = [];
+  let updateCategoryGridSearch = null;
 
   const isSeriesPage = location.pathname.includes('series.html');
   const mediaType = isSeriesPage ? 'series' : 'movie';
@@ -173,7 +174,7 @@
     return data;
   }
 
-  async function fetchByCategory(category, limit=60){
+  async function fetchByCategory(category, limit=1000){
     let q = supabase.from('movies').select('*').eq('type', mediaType).order('created_at', {ascending:false}).limit(limit);
     if(category && category !== 'All') q = q.ilike('category', `%${category}%`);
     const {data,error} = await q;
@@ -221,7 +222,10 @@
     filterList(allTrendingMovies, document.getElementById('trendingGrid'), emptyMsg);
     filterList(allLatestMovies, document.getElementById('latestGrid'), emptyMsg);
     filterList(allLatestSeries, document.getElementById('latestSeriesGrid'), emptyMsg);
-    filterList(allCategoryMovies, document.getElementById('categoryGrid'), emptyMsg);
+    
+    if (updateCategoryGridSearch) {
+      updateCategoryGridSearch(cleanQuery);
+    }
   }
 
   // ---------- home page ----------
@@ -230,26 +234,47 @@
     const latestEl = document.getElementById('latestGrid');
     const latestSeriesEl = document.getElementById('latestSeriesGrid');
     
-    if(trendingEl){
-      allTrendingMovies = await fetchTrending();
-      trendingEl.innerHTML = allTrendingMovies.length
-        ? allTrendingMovies.map(movieCardHTML).join('')
-        : `<p style="color:var(--muted)">No trending movies yet.</p>`;
+    try {
+      if(trendingEl){
+        allTrendingMovies = await fetchTrending();
+        trendingEl.innerHTML = allTrendingMovies.length
+          ? allTrendingMovies.map(movieCardHTML).join('')
+          : `<p style="color:var(--muted)">No trending movies yet.</p>`;
+      }
+    } catch(err) {
+      console.error("Error loading trending movies:", err);
+      if(trendingEl) trendingEl.innerHTML = `<p style="color:var(--muted)">Failed to load trending items.</p>`;
     }
-    if(latestEl){
-      allLatestMovies = await fetchLatest();
-      latestEl.innerHTML = allLatestMovies.length
-        ? allLatestMovies.map(movieCardHTML).join('')
-        : `<p style="color:var(--muted)">No movies added yet.</p>`;
+
+    try {
+      if(latestEl){
+        allLatestMovies = await fetchLatest();
+        latestEl.innerHTML = allLatestMovies.length
+          ? allLatestMovies.map(movieCardHTML).join('')
+          : `<p style="color:var(--muted)">No movies added yet.</p>`;
+      }
+    } catch(err) {
+      console.error("Error loading latest movies:", err);
+      if(latestEl) latestEl.innerHTML = `<p style="color:var(--muted)">Failed to load movies.</p>`;
     }
-    if(latestSeriesEl){
-      allLatestSeries = await fetchLatestSeries();
-      latestSeriesEl.innerHTML = allLatestSeries.length
-        ? allLatestSeries.map(movieCardHTML).join('')
-        : `<p style="color:var(--muted)">No TV series added yet.</p>`;
+
+    try {
+      if(latestSeriesEl){
+        allLatestSeries = await fetchLatestSeries();
+        latestSeriesEl.innerHTML = allLatestSeries.length
+          ? allLatestSeries.map(movieCardHTML).join('')
+          : `<p style="color:var(--muted)">No TV series added yet.</p>`;
+      }
+    } catch(err) {
+      console.error("Error loading latest TV series:", err);
+      if(latestSeriesEl) latestSeriesEl.innerHTML = `<p style="color:var(--muted)">Failed to load TV series.</p>`;
     }
     
-    await renderHeroBanner();
+    try {
+      await renderHeroBanner();
+    } catch(err) {
+      console.error("Error rendering hero banner:", err);
+    }
   }
 
   // ---------- category page ----------
@@ -258,40 +283,123 @@
     const gridEl = document.getElementById('categoryGrid');
     if(!chipsEl || !gridEl) return;
 
-    const params = new URLSearchParams(location.search);
-    let active = params.get('c') || 'All';
+    try {
+      const params = new URLSearchParams(location.search);
+      let active = params.get('c') || 'All';
+      let currentPage = 1;
+      const itemsPerPage = 16;
+      let activeQuery = '';
+      let filteredList = [];
 
-    const cats = ['All', ...await fetchCategories()];
-    chipsEl.innerHTML = cats.map(c =>
-      `<button class="chip ${c===active?'active':''}" data-cat="${escapeHtml(c)}">${escapeHtml(c)}</button>`
-    ).join('');
+      const cats = ['All', ...await fetchCategories()];
+      chipsEl.innerHTML = cats.map(c =>
+        `<button class="chip ${c===active?'active':''}" data-cat="${escapeHtml(c)}">${escapeHtml(c)}</button>`
+      ).join('');
 
-    async function load(cat){
-      active = cat;
-      chipsEl.querySelectorAll('.chip').forEach(ch=>{
-        ch.classList.toggle('active', ch.dataset.cat === cat);
-      });
-      allCategoryMovies = await fetchByCategory(cat);
-      
-      // Reset search bar when changing categories
-      const searchInput = document.getElementById('searchInput');
-      if (searchInput) searchInput.value = '';
+      function renderGridPage() {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const pageItems = filteredList.slice(startIndex, endIndex);
 
-      gridEl.innerHTML = allCategoryMovies.length
-        ? allCategoryMovies.map(movieCardHTML).join('')
-        : `<p style="color:var(--muted)">No movies in this category yet.</p>`;
+        gridEl.innerHTML = pageItems.length
+          ? pageItems.map(movieCardHTML).join('')
+          : `<p style="color:var(--muted)">No items found.</p>`;
+
+        // Render pagination controls UI
+        const totalPages = Math.ceil(filteredList.length / itemsPerPage) || 1;
+        const pagContainer = document.getElementById('paginationContainer');
+        if (!pagContainer) return;
+
+        if (filteredList.length <= itemsPerPage) {
+          pagContainer.innerHTML = '';
+          return;
+        }
+
+        const lang = localStorage.getItem('mp_lang') || 'en';
+        const prevText = lang === 'si' ? 'පෙර පිටුව' : 'Previous';
+        const nextText = lang === 'si' ? 'මීළඟ පිටුව' : 'Next';
+        const pageText = lang === 'si' 
+          ? `${totalPages} න් ${currentPage} වන පිටුව` 
+          : `Page ${currentPage} of ${totalPages}`;
+
+        pagContainer.innerHTML = `
+          <div class="pagination-controls" style="display:flex; justify-content:center; align-items:center; gap:16px; margin-top:32px;">
+            <button id="prevPageBtn" class="btn secondary" style="margin:0; padding:8px 16px; font-size:13px; border-radius:20px;" ${currentPage === 1 ? 'disabled' : ''}>${prevText}</button>
+            <span style="font-size:14px; font-weight:600; color:var(--muted);">${pageText}</span>
+            <button id="nextPageBtn" class="btn secondary" style="margin:0; padding:8px 16px; font-size:13px; border-radius:20px;" ${currentPage === totalPages ? 'disabled' : ''}>${nextText}</button>
+          </div>
+        `;
+
+        document.getElementById('prevPageBtn').addEventListener('click', () => {
+          if (currentPage > 1) {
+            currentPage--;
+            renderGridPage();
+            window.scrollTo({ top: gridEl.offsetTop - 100, behavior: 'smooth' });
+          }
+        });
+
+        document.getElementById('nextPageBtn').addEventListener('click', () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            renderGridPage();
+            window.scrollTo({ top: gridEl.offsetTop - 100, behavior: 'smooth' });
+          }
+        });
+      }
+
+      function updateList() {
+        if (!activeQuery) {
+          filteredList = allCategoryMovies;
+        } else {
+          filteredList = allCategoryMovies.filter(m => 
+            m.title.toLowerCase().includes(activeQuery) || 
+            (m.description && m.description.toLowerCase().includes(activeQuery)) ||
+            (m.category && m.category.toLowerCase().includes(activeQuery))
+          );
+        }
+        currentPage = 1;
+        renderGridPage();
+      }
+
+      updateCategoryGridSearch = (q) => {
+        activeQuery = q;
+        updateList();
+      };
+
+      async function load(cat){
+        active = cat;
+        chipsEl.querySelectorAll('.chip').forEach(ch=>{
+          ch.classList.toggle('active', ch.dataset.cat === cat);
+        });
         
-      const url = new URL(location);
-      cat === 'All' ? url.searchParams.delete('c') : url.searchParams.set('c', cat);
-      history.replaceState(null, '', url);
+        try {
+          allCategoryMovies = await fetchByCategory(cat);
+          
+          const searchInput = document.getElementById('searchInput');
+          if (searchInput) searchInput.value = '';
+
+          activeQuery = '';
+          updateList();
+        } catch(err) {
+          console.error("Error loading category items:", err);
+          gridEl.innerHTML = `<p style="color:var(--muted)">Failed to load items.</p>`;
+        }
+          
+        const url = new URL(location);
+        cat === 'All' ? url.searchParams.delete('c') : url.searchParams.set('c', cat);
+        history.replaceState(null, '', url);
+      }
+
+      chipsEl.addEventListener('click', e=>{
+        const btn = e.target.closest('.chip');
+        if(btn) load(btn.dataset.cat);
+      });
+
+      await load(active);
+    } catch(err) {
+      console.error("Error rendering category page explorer:", err);
+      gridEl.innerHTML = `<p style="color:var(--muted)">Failed to load category explorer.</p>`;
     }
-
-    chipsEl.addEventListener('click', e=>{
-      const btn = e.target.closest('.chip');
-      if(btn) load(btn.dataset.cat);
-    });
-
-    load(active);
   }
 
   // ---------- DOM setup ----------
